@@ -1,3 +1,3 @@
-# csci499
-Just a repo
-for the capstone project
+# CSCI499 capstone 
+
+Group Project
