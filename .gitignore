@@ -1,0 +1,37 @@
+# Virtual environments
+venv/
+env/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Database and environment files
+*.sqlite3  # Ignores all SQLite databases
+.env
+config/settings/local.py
+
+# Django migration files (optional)
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Logs
+logs/
+debug.log
+*.log  # Ignore all log files
+
+# Static and media files
+backend/static/
+media/
+
+# React and Node.js files
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# macOS and editor-specific files
+.DS_Store
+.vscode/
+.idea/
