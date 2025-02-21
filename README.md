@@ -23,6 +23,6 @@ Then, go to the backend directory, which is the directory with manage.py, and ru
 python3 manage.py runserver
 ```
 If there are no errors, you should get this link: (http://127.0.0.1:8000). If you click it, you will be taken to a webpage that has a 404 error. However, if you go to (http://127.0.0.1:8000/api/hello/), you will see this:
-<img width="1108" alt="Screenshot 2025-02-19 at 7 43 10 PM" src="https://github.com/user-attachments/assets/bff9e34f-30e8-41b6-9c09-61ac80a6169a" />
+<img width="1346" alt="Screenshot 2025-02-21 at 12 27 27 AM" src="https://github.com/user-attachments/assets/d2f5b2b8-db9f-4c92-9022-d46058d2ec5b" />
 If you do, great! Let's move on to the next. 
 
