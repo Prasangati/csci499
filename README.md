@@ -1,7 +1,11 @@
 # CSCI 499-01  
 
 
-Hey guys, I am going to give the basic guideline on how to set up the project. It is important we do it properly so we don't run into issues later. Hopefully, everyone has already cloned the project and thus, is using git to track and update any new developments. The first thing you need to do is set up a virtual enivorment. The commands should be run in the root directory. Also, note that I use python3/pip3 for the commands, but if they don't work, use python/pip. Here are the commands:
+
+Hey guys, I am going to give a basic guideline on how to set up the project. It is important we do it properly so we don't run into issues later. Hopefully, everyone has already cloned the project and thus, is using git to track and update any new developments. 
+
+## Backend with Django
+The first thing you need to do is set up a virtual enivorment. The commands should be run in the root directory. Also, note that I use python3/pip3 for the commands, but if they don't work, use python/pip. Here are the commands:
 ``` bash
 python3 -m venv venv
 ```
@@ -25,4 +29,34 @@ python3 manage.py runserver
 If there are no errors, you should get this link: (http://127.0.0.1:8000). If you click it, you will be taken to a webpage that has a 404 error. However, if you go to (http://127.0.0.1:8000/api/hello/), you will see this:
 <img width="1346" alt="Screenshot 2025-02-21 at 12 27 27 AM" src="https://github.com/user-attachments/assets/d2f5b2b8-db9f-4c92-9022-d46058d2ec5b" />
 If you do, great! Let's move on to the next. 
+
+
+## Frontend with React
+Clear the terminal and go to the frontend directory and enter the command:
+```bash
+npm install
+```
+This should install the dependencies for React.
+
+## Running both of them together
+Firstly, you need to create a Django server by going to the backend directory with the "manage.py" file. Once you are in that directory, enter:
+``` bash
+python3 manage.py runserver
+```
+If that doesn't work, make sure you are in the virtual enviroment by entering the second command from the first section. 
+Open a new terminal without closing the one where the previous command was entered, and go to the frontend directory and from there, enter:
+```bash
+npm start
+```
+You will receive a link. If you open the link, you will see:
+<img width="719" alt="Screenshot 2025-02-21 at 1 01 30 AM" src="https://github.com/user-attachments/assets/cd8abb6e-e285-49c6-b88c-b41b6da61e85" />
+
+That's it!
+
+
+
+
+
+
+
 
