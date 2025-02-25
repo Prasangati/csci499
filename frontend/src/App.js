@@ -5,8 +5,8 @@ function App() {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        axios.get("http://127.0.0.1:8000/api/hello/")
-            .then(response => setMessage(response.data.message))
+        axios.get("http://127.0.0.1:8000/hello/")
+            .then(response => setMessage(response.data.StudentID))
             .catch(error => console.error("Error fetching data:", error));
     }, []);
 
