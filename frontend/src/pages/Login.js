@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import "../App.css";
 
-function Home() {
+function Login() {
    const navigate = useNavigate();
 
    const handleLoginClick = (event) => {
@@ -17,12 +17,15 @@ function Home() {
                <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
 
                <form className="login-form">
-                   <label>Email</label>
-                   <input type="email" placeholder="Enter your email" className="input-field" />
 
-                   <label>Password</label>
-                   <input type="password" placeholder="Enter your password" className="input-field" />
-         {/* Login Button */}
+                   <input type="email" placeholder="Enter your email" className="input-field"/>
+
+
+                   <label className="usernamepass">
+                       <input type="password" placeholder="Enter your password" className="input-field"/>
+                       {/* Login Button */}
+                   </label>
+
                    <button type="submit" className="login-btn" onClick={handleLoginClick}>
                        Login
                    </button>
@@ -47,4 +50,4 @@ function Home() {
    );
 }
 
-export default Home;
+export default Login;
