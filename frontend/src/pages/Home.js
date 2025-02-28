@@ -22,7 +22,7 @@ function Home() {
 
                    <label>Password</label>
                    <input type="password" placeholder="Enter your password" className="input-field" />
-
+         {/* Login Button */}
                    <button type="submit" className="login-btn" onClick={handleLoginClick}>
                        Login
                    </button>
@@ -36,7 +36,7 @@ function Home() {
                    <img src="/G.webp" alt="Google Logo" className="google-logo" />
                    Continue with Google
                </button>
-
+               {/* Signup Link */}
                <p className="signup-text">
                    Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
                </p>
