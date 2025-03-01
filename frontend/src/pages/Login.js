@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "../App.css";
 import "./Login.css";
+import "../App.css";
 
 
 
@@ -17,71 +17,76 @@ import "./Login.css";
         const handleLoginSubmit = (event) => {
             event.preventDefault();
             console.log("Logging in with:", { email, password });
-            navigate("/dashboard"); // Redirect after login
+    
+            // Send credentials to backend (adjust API endpoint as needed)
+            axios.post("http://localhost:8000/auth/login/", { email, password })
+                .then((res) => {
+                    console.log("Login Success:", res.data);
+                    navigate("/dashboard"); // Redirect after successful login
+                })
+                .catch((error) => {
+                    console.error("Login failed:", error.response?.data || error);
+                });
         };
-     
-
-
 
     // Handle Google OAuth login when the button is clicked
-    const login = useGoogleLogin({
+    const googleLogin = useGoogleLogin({
         onSuccess: async (response) => {
-            console.log("Google Login Response:", response); // 🔹 Debugging: Log response
-
+            console.log("Google Login Response:", response);
+    
             try {
-                // Send the token to Django for signup
+                // Send Google token to backend
                 const res = await axios.post(
                     "http://localhost:8000/auth/google-signup/",
-                    { token: response.credential },
+                    { token: response.access_token },
                     { withCredentials: true }
                 );
-
-                console.log("Backend Response:", res.data); // 🔹 Debugging: Log backend response
-
-                navigate("/signup-success"); // Redirect to success page
+    
+                console.log("Google Login Success:", res.data);
+                navigate("/dashboard"); // Redirect after Google login
             } catch (error) {
-                console.error("Signup failed:", error.response?.data || error);
+                console.error("Google login failed:", error.response?.data || error);
             }
         },
         onError: () => console.log("Google Signup Failed"),
     });
+    
+
 
     return (
         <div className="home-container">
-            <div className="Login-box">
+            <div className="login-box">
                 <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
 
-
-
+                {/* Email/Password Login Form */}
                 <form onSubmit={handleLoginSubmit} className="login-form">
-                   {/* Email Field */}
-                   <div className="input-container">
-                       <input
-                           type="email"
-                           id="email"
-                           className="input-field"
-                           placeholder=" "
-                           value={email}
-                           onChange={(e) => setEmail(e.target.value)}
-                           required
-                       />
-                       <label htmlFor="email">Enter your email</label>
-                   </div>
+                    {/* Email Field */}
+                    <div className="input-container">
+                        <input
+                            type="email"
+                            id="email"
+                            className="input-field"
+                            placeholder=" "
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <label htmlFor="email">Enter your email</label>
+                    </div>
 
-
-     {/* pw input box */}
-     <div className="input-container">
-                       <input
-                           type="password"
-                           id="password"
-                           className="input-field"
-                           placeholder=" "
-                           value={password}
-                           onChange={(e) => setPassword(e.target.value)}
-                           required
-                       />
-                       <label htmlFor="password">Enter your password</label>
-                   </div>
+                    {/* Password Field */}
+                    <div className="input-container">
+                        <input
+                            type="password"
+                            id="password"
+                            className="input-field"
+                            placeholder=" "
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <label htmlFor="password">Enter your password</label>
+                    </div>
 
      {/* Login Button */}
      <button type="submit" className="login-btn">
@@ -95,20 +100,43 @@ import "./Login.css";
 
 
 
-                {/* Custom Google Signup Button */}
-                <button className="google-btn" onClick={() => login()}>
-                    <img src="/G.webp" alt="Google Logo" className="google-logo" />
-                    Continue with Google
-                </button>
+                {/* Google Signup Button */}
+                <button className="google-btn" onClick={() => googleLogin()}>
+    <img src="/G.webp" alt="Google Logo" className="google-logo" />
+    Continue with Google
+</button>
 
-                {/* Redirect to signup */}
+
+
+
+       {/* dont have an account- Signup Button */}
                 <p className="signup-text">
-                    Do not have an account yet? <a href="/signup" className="signup-link">Sign up</a>
-                </p>
-            </div>
+                   Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
+               </p>
 
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+            </div>
     );
-};
+}
 
 export default Login;

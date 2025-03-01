@@ -177,4 +177,9 @@
 .signup-link:hover {
     text-decoration: underline;
 }
-
+.footer-text {
+    color: white;
+    margin-top: 20px;
+    font-size: 16px;
+ }
+ 
