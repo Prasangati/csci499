@@ -53,10 +53,29 @@ import "./Login.css";
 
 
 
+                <form onSubmit={handleLoginSubmit} className="login-form">
+                   {/* Email Field */}
+                   <div className="input-container">
+                       <input
+                           type="email"
+                           id="email"
+                           className="input-field"
+                           placeholder=" "
+                           value={email}
+                           onChange={(e) => setEmail(e.target.value)}
+                           required
+                       />
+                       <label htmlFor="email">Enter your email</label>
+                   </div>
 
 
 
 
+     {/* Login Button */}
+     <button type="submit" className="login-btn">
+                       Login
+                   </button>
+                   </form>
                 {/* Divider */}
                 <div className="divider">
                     <span>OR</span>
