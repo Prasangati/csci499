@@ -153,10 +153,24 @@ import "../App.css";
 
 
 
-          
-          
                 </div>
-        
+                {showResetModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={() => setShowResetModal(false)}>&times;</span>
+                        <h2>Forgot Password?</h2>
+                        <p>Enter your email below and we'll send you a link to reset your password.</p>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={resetEmail}
+                            onChange={(e) => setResetEmail(e.target.value)}
+                        />
+                        <button className="reset-btn" onClick={handleResetPassword}>Get Reset Link</button>
+                        <p className="reset-message">{resetMessage}</p>
+                    </div>
+                </div>
+            )}
 
 
 
