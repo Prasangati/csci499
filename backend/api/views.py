@@ -1,38 +1,79 @@
 import json
+import traceback  # Add at top of file
 import requests
 from django.contrib.auth import get_user_model, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
+from datetime import datetime, timezone  # Correct import for UTC handling
 
 User = get_user_model()
+
 
 @csrf_exempt
 def google_signup(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        token = data.get("token")
+        try:
+            # Debug raw request body
+            raw_body = request.body
+            print(f"Raw request body: {raw_body}")
 
-        # Verify Google Token
-        google_response = requests.get(
-            f"https://oauth2.googleapis.com/tokeninfo?id_token={token}"
-        ).json()
+            # Parse JSON with error handling
+            try:
+                data = json.loads(raw_body.decode('utf-8'))
+            except json.JSONDecodeError as e:
+                print(f"JSON Error: {str(e)}")
+                return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
-        if "email" not in google_response:
-            return JsonResponse({"error": "Invalid token"}, status=400)
+            # Extract token
+            token = data.get("token")
+            print(f"Extracted token: {token[:10]}...")  # Log first 10 chars for security
 
-        email = google_response["email"]
-        first_name = google_response.get("given_name", "")
-        last_name = google_response.get("family_name", "")
+            if not token:
+                return JsonResponse({"error": "No token provided"}, status=400)
 
-        # Check if user exists
-        user, created = User.objects.get_or_create(email=email, defaults={
-            "first_name": first_name,
-            "last_name": last_name,
-            "username": email.split("@")[0]
-        })
+            # Verify token
+            try:
+                id_info = id_token.verify_oauth2_token(
+                    token,
+                    google_requests.Request(),
+                    settings.GOOGLE_OAUTH_CLIENT_ID
+                )
+            except ValueError as e:
+                print(f"Token Verification Error: {str(e)}")
+                return JsonResponse({"error": "Invalid token"}, status=400)
+
+            # Check token expiration
+            expiry_timestamp = id_info.get("exp")
+            if expiry_timestamp and datetime.now(timezone.utc).timestamp() > expiry_timestamp:
+                return JsonResponse({"error": "Expired token"}, status=401)
+
+            # Extract email
+            email = id_info.get('email')
+            if not email:
+                return JsonResponse({"error": "Email not found in token"}, status=400)
+
+            # Create/update user
+            user, created = User.objects.get_or_create(
+                email=email,
+                defaults={
+                    "first_name": id_info.get('given_name', ''),
+                    "last_name": id_info.get('family_name', ''),
+                }
+            )
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
 
 
-        # Log in user and create session
-        login(request, user)
+            login(request, user)
+            return JsonResponse({
+                "status": "success",
+                "user": {"email": email}
+            })
 
-        return JsonResponse({"message": "Signup successful"})
+        except Exception as e:
+            traceback.print_exc()  # Logs full traceback
+            return JsonResponse({"error": "Internal server error"}, status=500)
+
+    return JsonResponse({"error": "Method not allowed"}, status=405)

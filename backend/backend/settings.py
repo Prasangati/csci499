@@ -68,15 +68,21 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React frontend
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
+CORS_EXPOSE_HEADERS = ['Set-Cookie']  # If using cookies
+
+
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',  # For social auth
     'social_core.backends.google.GoogleOAuth2',
 )
-
 
 
 
@@ -105,7 +111,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 load_dotenv()
-tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+#tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
+tmpPostgres = urlparse('postgresql://Spoons_owner:npg_pCelmZOIrN58@ep-lively-voice-a5sd645t-pooler.us-east-2.aws.neon.tech/Spoons?sslmode=require')
+
 
 DATABASES = {
     'default': {
@@ -127,6 +136,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
+GOOGLE_OAUTH_CLIENT_ID = '974911060543-6gsff2mmv7jfakgap4i71rpip850mso7.apps.googleusercontent.com'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("CLIENT_ID")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("CLIENT_SECRET")

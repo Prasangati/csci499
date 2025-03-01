@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+# Just a placeholder
 
+def react_frontend(request):
+    return HttpResponse("React App", status=200)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),  # Include API URLs
+    path('api/', include('api.urls')),  # Include API URLs
+    path("", react_frontend),  # Let React handle other routes
+
 ]
