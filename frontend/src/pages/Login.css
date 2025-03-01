@@ -6,10 +6,6 @@
     height: 100vh;
 }
 
-.login-form input{
-    margin-top: 0px;
-}
-
 .login-box {
     background: #bee7e9;
     padding: 50px;
@@ -28,7 +24,6 @@
     transform: translateY(-5px);
     box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.4);
 }
-
 
 /* styling Spooons logo */
 .welcome-image {
@@ -147,21 +142,18 @@
     align-items: center;
     justify-content: center;
     background: #066341;
-    border: none;
+    border: 1px solid #ccc;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
     width: 100%;
     max-width: 400px;
-    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .google-btn:hover {
     background: #06432c;
-    transform: scale(1.05); /* Slight scaling effect on hover */
 }
 
 .google-logo {
@@ -186,8 +178,3 @@
     text-decoration: underline;
 }
 
-.footer-text {
-    color: white;
-    margin-top: 20px;
-    font-size: 16px;
-}
