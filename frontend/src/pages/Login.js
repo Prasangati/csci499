@@ -14,6 +14,14 @@ import "../App.css";
         const [password, setPassword] = useState("");
         const [error, setError] = useState(""); //store error messages
         const [loading, setLoading] = useState(false); // for preventing multiple requests
+        const [showResetModal, setShowResetModal] = useState(false); // Control modal visibility
+    const [resetEmail, setResetEmail] = useState(""); // Store reset email
+    const [resetMessage, setResetMessage] = useState(""); // Store reset success/error message
+    const handleForgotPassword = () => {
+        setResetMessage(""); 
+        setShowResetModal(true); 
+    };
+    
      
         const handleLoginSubmit = (event) => {
             event.preventDefault();
@@ -32,6 +40,24 @@ import "../App.css";
                 })
                 .finally(() => setLoading(false));
         };
+
+        //fucntion for handling pwReset
+        const handleResetPassword = () => {
+            if (!resetEmail) {
+                setResetMessage("Please enter your email.");
+                return;
+            }
+        
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/password-reset/`, { email: resetEmail })
+                .then(() => {
+                    setResetMessage("A reset link has been sent to your email.");
+                })
+                .catch((error) => {
+                    setResetMessage("Failed to send reset email. Please try again.");
+                    console.error("Reset failed:", error.response?.data || error);
+                });
+        };
+        
     // Handle Google OAuth login when the button is clicked
     const googleLogin = useGoogleLogin({
         onSuccess: async (response) => {
@@ -95,6 +121,9 @@ import "../App.css";
                         />
                         <label htmlFor="password">Password</label>
                     </div>
+                    <p className="forgot-password" onClick={handleForgotPassword}>
+    Forgot Password?
+</p>
 
      {/* Login Button */}
      <button type="submit" className="login-btn">
@@ -124,22 +153,10 @@ import "../App.css";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          
+          
                 </div>
-
+        
 
 
 
