@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Signup.css"; // Import styles
+import "./Login.css";
 import "../App.css";
 
-const Signup = () => {
-    const navigate = useNavigate();
+
+
+
+    function Login() {
+        const navigate = useNavigate();
+        const [email, setEmail] = useState("");
+        const [password, setPassword] = useState("");
+     
+     
+        const handleLoginSubmit = (event) => {
+            event.preventDefault();
+            console.log("Logging in with:", { email, password });
+            navigate("/dashboard"); // Redirect after login
+        };
+     
+
+
 
     // Handle Google OAuth login when the button is clicked
     const login = useGoogleLogin({
@@ -33,7 +48,7 @@ const Signup = () => {
 
     return (
         <div className="home-container">
-            <div className="signup-box">
+            <div className="Login-box">
                 <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
 
                 {/* Signup Form */}
