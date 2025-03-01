@@ -175,8 +175,8 @@
     margin-right: 10px;
 }
 
-/* Redirect to login */
-.login-text {
+/* Redirect to signup */
+.signup-text {
     font-size: 16px;
     color: #666;
     margin-top: 15px;
@@ -184,13 +184,13 @@
 
 
 
-.login-link {
+.signup-link {
     color: #066341;
     text-decoration: none;
     font-weight: bold;
 }
 
-.login-link:hover {
+.signup-link:hover {
     text-decoration: underline;
 }
 

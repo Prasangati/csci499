@@ -59,9 +59,9 @@ const Signup = () => {
                     Continue with Google
                 </button>
 
-                {/* Redirect to login */}
-                <p className="login-text">
-                    Already have an account? <a href="/login" className="login-link">Login</a>
+                {/* Redirect to signup */}
+                <p className="signup-text">
+                    Do not have an account yet? <a href="/signup" className="signup-link">Sign up</a>
                 </p>
             </div>
 
