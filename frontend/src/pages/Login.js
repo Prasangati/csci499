@@ -51,27 +51,16 @@ import "./Login.css";
             <div className="Login-box">
                 <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
 
-                {/* Signup Form */}
-                <form className="signup-form">
 
-                    <input type="email" placeholder="Email address" className="input-field" />
-                    <input type="password" placeholder="Password" className="input-field" />
 
-                    <button type="submit" className="signup-btn">
-                        Sign Up
-                    </button>
-                </form>
+
+
+
 
                 {/* Divider */}
                 <div className="divider">
                     <span>OR</span>
                 </div>
-
-
-
-
-
-
 
 
 
@@ -87,7 +76,6 @@ import "./Login.css";
                 </p>
             </div>
 
-            <p className="footer-text">React + Django Integration</p>
         </div>
     );
 };
