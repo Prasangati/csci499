@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import "../App.css";
 
 function Login() {
    const navigate = useNavigate();
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
 
-   const handleLoginClick = (event) => {
+   const handleLoginSubmit = (event) => {
        event.preventDefault();
+       console.log("Logging in with:", { email, password });
        navigate("/login");
    };
 
@@ -16,9 +19,17 @@ function Login() {
            <div className="login-box">
                <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
 
-               <form className="login-form">
+               <form onSubmit={handleLoginSubmit} className="login-form">
 
-                   <input type="email" placeholder="Enter your email" className="input-field"/>
+               <div className="input-container">
+                       <input
+                           type="email" id="email" className="input-field" placeholder=" "
+                           value={email}
+                           onChange={(e) => setEmail(e.target.value)}
+                           required
+                       />
+                       <label htmlFor="email">Enter your email</label>
+                   </div>
 
 
                    <label className="usernamepass">
@@ -26,7 +37,7 @@ function Login() {
                        {/* Login Button */}
                    </label>
 
-                   <button type="submit" className="login-btn" onClick={handleLoginClick}>
+                   <button type="submit" className="login-btn" >
                        Login
                    </button>
                </form>

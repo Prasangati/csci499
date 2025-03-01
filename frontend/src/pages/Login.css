@@ -32,9 +32,6 @@
     margin: 0 auto 20px;
 }
 
-
-
-
 .login-form {
     display: flex;
     flex-direction: column;
@@ -51,23 +48,47 @@
     margin-bottom: 5px;
     color: #555;
 }
-
-.input-field {
+.input-container {
+    position: relative;
     width: 100%;
     max-width: 400px;
-    padding: 15px;
+ }
+ .input-container input {
+    width: 100%;
+    padding: 18px 12px 6px;
     font-size: 16px;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 2px solid #066341;
+    background: transparent;
     text-align: left;
-    display: block;
-    margin: 5px auto;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+ }
+ .input-container label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    padding: 0 5px;
+    color: #066341;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+    display: inline-block; 
+    white-space: nowrap; 
+ }
+
+ /* for when the input is focused/ has text */
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+   top: 0;
+   font-size: 14px;
+   background-color: #bee7e9; 
+   padding: 0 5px;
+   display: inline-block; 
+   width: auto; 
 }
 
-.input-field:focus {
-    border-color: #4A90E2;
-    outline: none;
-}
 
 .login-btn {
     background: #066341;
