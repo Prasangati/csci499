@@ -69,7 +69,19 @@ import "./Login.css";
                    </div>
 
 
-
+     {/* pw input box */}
+     <div className="input-container">
+                       <input
+                           type="password"
+                           id="password"
+                           className="input-field"
+                           placeholder=" "
+                           value={password}
+                           onChange={(e) => setPassword(e.target.value)}
+                           required
+                       />
+                       <label htmlFor="password">Enter your password</label>
+                   </div>
 
      {/* Login Button */}
      <button type="submit" className="login-btn">

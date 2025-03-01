@@ -10,14 +10,6 @@
     margin-top: 0px;
 }
 
-label {
-color: #B4886B;
-font-weight: bold;
-display: block;
-width: 150px;
-float: left;
-}
-
 .login-box {
     background: #bee7e9;
     padding: 50px;
