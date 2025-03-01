@@ -38,10 +38,9 @@ const Signup = () => {
 
                 {/* Signup Form */}
                 <form className="signup-form">
-                    <input type="text" placeholder="First Name" className="input-field" />
-                    <input type="text" placeholder="Last Name" className="input-field" />
-                    <input type="email" placeholder="Enter your email" className="input-field" />
-                    <input type="password" placeholder="Create a password" className="input-field" />
+
+                    <input type="email" placeholder="Email address" className="input-field" />
+                    <input type="password" placeholder="Password" className="input-field" />
 
                     <button type="submit" className="signup-btn">
                         Sign Up
@@ -52,6 +51,14 @@ const Signup = () => {
                 <div className="divider">
                     <span>OR</span>
                 </div>
+
+
+
+
+
+
+
+
 
                 {/* Custom Google Signup Button */}
                 <button className="google-btn" onClick={() => login()}>
