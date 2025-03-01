@@ -1,5 +1,5 @@
 import React from "react";
-import { GoogleLogin } from "@react-oauth/google"; // ✅ Use GoogleLogin instead
+import { GoogleLogin } from "@react-oauth/google"; //  Use GoogleLogin instead
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css"; // Import styles
@@ -13,7 +13,7 @@ const Signup = () => {
 
         try {
             if (!response.credential) {
-                console.error("❌ No ID token received from Google");
+                console.error(" No ID token received from Google");
                 return;
             }
 
@@ -30,7 +30,7 @@ const Signup = () => {
             console.log("✅ Signup successful:", res.data);
             navigate("/signup-success");
         } catch (error) {
-            console.error("❌ Signup failed:", error.response?.data || error);
+            console.error(" Signup failed:", error.response?.data || error);
         }
     };
 
@@ -59,10 +59,10 @@ const Signup = () => {
                     <span>OR</span>
                 </div>
 
-                {/* ✅ Use GoogleLogin component instead of custom button */}
+                {/*  Use GoogleLogin component instead of custom button */}
                 <GoogleLogin
                     onSuccess={handleGoogleSuccess}
-                    onError={() => console.log("❌ Google Signup Failed")}
+                    onError={() => console.log(" Google Signup Failed")}
                 />
 
                 <p className="login-text">
