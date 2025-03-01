@@ -28,15 +28,21 @@ function Login() {
                            onChange={(e) => setEmail(e.target.value)}
                            required
                        />
-                       <label htmlFor="email">Enter your email</label>
+                       <label htmlFor="email">Email address</label>
                    </div>
 
-
-                   <label className="usernamepass">
-                       <input type="password" placeholder="Enter your password" className="input-field"/>
+                    <div className="input-container">
+                       <input
+                           type="password" id="password" className="input-field" placeholder=" "
+                             value={password} onChange={(e) => setPassword(e.target.value)}
+                           required
+                       />
+                       <label htmlFor="password">Password</label>
+                   </div>
+                      
+                      
                        {/* Login Button */}
-                   </label>
-
+                  
                    <button type="submit" className="login-btn" >
                        Login
                    </button>
