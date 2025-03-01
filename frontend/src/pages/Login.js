@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
 import "../App.css";
+import "./Login.css";
 
 
 
@@ -92,4 +92,4 @@ import "../App.css";
     );
 };
 
-export default Signup;
+export default Login;
