@@ -207,17 +207,86 @@
     display: flex;
     align-items: center;
     justify-content: center;
- }
- .modal-content {
+}
+
+.modal-content {
+    position: relative; /* Ensures close button is positioned inside */
+
     background: #bee7e9;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 12px;
     text-align: center;
-    width: 350px;
- }
- .close {
-    float: right;
-    font-size: 20px;
+    width: 420px; /* Slightly larger */
+    max-width: 90%;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Space out the heading and paragraph */
+.modal-content h2 {
+    font-size: 22px;
+    margin-bottom: 15px; /* More spacing */
+}
+
+.modal-content p {
+    font-size: 16px;
+    line-height: 1.6; /* Improves text readability */
+    margin-bottom: 25px; /* More space before input */
+}
+
+/* Space between input and button */
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Add space between input and button */
+    width: 100%;
+    margin-bottom: 20px; /* More spacing below input */
+}
+
+.input-container input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #06432c;
+    border-radius: 8px;
+    outline: none;
+    width: 70%;
+}
+
+.reset-btn {
+    background: #06432c;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
     cursor: pointer;
- }
- 
+    transition: background 0.3s ease-in-out;
+}
+
+.reset-btn:hover {
+    background: #03291e;
+}
+
+/* Space below the button */
+.reset-message {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.close {
+    position: absolute;
+    top: 15px; /* Position inside the modal */
+    right: 20px; /* Align to the right */
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #333; /* Darker color for visibility */
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+.close:hover {
+    color: #06432c; /* Matches theme */
+}
