@@ -14,20 +14,24 @@ import "../App.css";
         const [password, setPassword] = useState("");
         const [error, setError] = useState(""); //store error messages
         const [loading, setLoading] = useState(false); // for preventing multiple requests
-        const [showResetModal, setShowResetModal] = useState(false); // Control modal visibility
+
+        const [isModalOpen, setIsModalOpen] = useState(false);
+
     const [resetEmail, setResetEmail] = useState(""); // Store reset email
     const [resetMessage, setResetMessage] = useState(""); // Store reset success/error message
+
     const handleForgotPassword = () => {
-        setResetMessage(""); 
-        setShowResetModal(true); 
+       setIsModalOpen(true);
+ 
     };
     
      
         const handleLoginSubmit = (event) => {
             event.preventDefault();
-            setError(""); // Clear previous errors
-            setLoading(true); // Disable button while logging in
+            setError(""); 
+            setLoading(true); 
             console.log("Logging in with:", { email, password });
+
     
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login/`, { email, password })
                 .then((res) => {
@@ -150,28 +154,37 @@ import "../App.css";
                 <p className="signup-text">
                    Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
                </p>
-
-
-
                 </div>
-                {showResetModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="close" onClick={() => setShowResetModal(false)}>&times;</span>
-                        <h2>Forgot Password?</h2>
-                        <p>Enter your email below and we'll send you a link to reset your password.</p>
-                        <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={resetEmail}
-                            onChange={(e) => setResetEmail(e.target.value)}
-                        />
-                        <button className="reset-btn" onClick={handleResetPassword}>Get Reset Link</button>
-                        <p className="reset-message">{resetMessage}</p>
-                    </div>
-                </div>
-            )}
 
+
+                {isModalOpen && (
+               <div className="modal">
+                   <div className="modal-content">
+                       <button className="close" onClick={() => setIsModalOpen(false)}>&times;</button>
+                       <h2>Forgot Password?</h2>
+                       <p>Enter your email below and we'll send you a link to reset your password.</p>
+
+
+                       <div className="input-container">
+                           <input
+                               type="email"
+                               id="reset-email"
+                               className="input-field"
+                               placeholder=" "
+                               value={resetEmail}
+                               onChange={(e) => setResetEmail(e.target.value)}
+                               required
+                           />
+                           <label htmlFor="reset-email">Email address</label>
+                       </div>
+
+
+                       <button className="reset-btn" onClick={handleResetPassword}>Get Reset Link</button>
+                       <p className="reset-message">{resetMessage}</p>
+                   </div>
+              
+                   </div>
+                )}
 
 
             </div>

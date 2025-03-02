@@ -29,7 +29,7 @@
 .welcome-image {
     width: 350px;
     display: block;
-    margin: 0 auto 20px;
+
 }
 
 .login-form {
@@ -38,15 +38,6 @@
     align-items: center;
     width: 100%;
     gap: 15px;
-}
-
-.login-form label {
-    width: 100%;
-    max-width: 400px;
-    text-align: left;
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #555;
 }
 .input-container {
     position: relative;
@@ -60,7 +51,6 @@
     border-radius: 8px;
     border: 2px solid #066341;
     background: transparent;
-    text-align: left;
     outline: none;
     transition: border-color 0.3s ease-in-out;
  }
@@ -74,8 +64,6 @@
     color: #066341;
     font-size: 16px;
     transition: 0.3s ease-in-out;
-    display: inline-block; 
-    white-space: nowrap; 
  }
 
  /* for when the input is focused/ has text */
@@ -89,8 +77,7 @@
    width: auto; 
 }
 
-
-.login-btn {
+.login-btn{
     background: #066341;
     color: white;
     padding: 15px;
@@ -104,36 +91,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
-.login-btn:hover {
-    background: #06432c;
-}
-/* divider between the login options */
-
-.divider {
-    margin: 20px 0;
-    font-size: 16px;
-    color: #066341;
-    position: relative;
-    text-align: center;
+.reset-btn {
     width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: #06432c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    margin-top: 10px; /* Space between input and button */
 }
-
-.divider::before,
-.divider::after {
-    content: "";
-    display: inline-block;
-    height: 1px;
-    background: #ddd;
-    width: 40%;
-    vertical-align: middle;
-}
-
-.divider span {
-    display: inline-block;
-    padding: 0 10px;
-    vertical-align: middle;
+.login-btn:hover, .reset-btn:hover {
+    background: #06432c;
 }
 
 .google-btn {
@@ -162,26 +136,7 @@
     margin-right: 10px;
 }
 
-.signup-text {
-    font-size: 16px;
-    color: #666;
-    margin-top: 15px;
-}
 
-.signup-link {
-    color: #066341;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.signup-link:hover {
-    text-decoration: underline;
-}
-.footer-text {
-    color: white;
-    margin-top: 20px;
-    font-size: 16px;
- }
  
  .forgot-password {
     color: #06432c;
@@ -238,43 +193,53 @@
 
 
 .input-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; 
+    position: relative;
     width: 100%;
-    margin-bottom: 20px; /* More spacing below input */
+    max-width: 400px;
+    display: flex;
+    flex-direction: column; /* Stack input & label */
+    align-items: center;
+    gap: 10px; /* Space between input and button */
 }
 
 .input-container input {
-    flex: 1;
-    padding: 12px;
+    width: 100%;
+    padding: 14px 12px;
     font-size: 16px;
+    border-radius: 8px;
     border: 2px solid #06432c;
-    border-radius: 8px;
+    background: transparent;
     outline: none;
-    width: 70%;
+    transition: border-color 0.3s ease-in-out;
 }
 
-.reset-btn {
-    background: #06432c;
-    color: white;
-    padding: 10px 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+/* Label styling similar to Email & Password */
+.input-container label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    padding: 0 5px;
+    color: #06432c;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
 }
 
-.reset-btn:hover {
-    background: #03291e;
+/* When input is focused or has text */
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 14px;
+    background-color: #bee7e9; /* Match input background */
+    padding: 0 5px;
+    display: inline-block;
+    width: auto;
 }
-
 /* Space below the button */
 .reset-message {
     margin-top: 15px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .close {
