@@ -1,9 +1,9 @@
 import React from "react";
-import { GoogleLogin } from "@react-oauth/google"; //  Use GoogleLogin instead
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "./Signup.css"; // Import styles
 import "../App.css";
+import "./Signup.css"; 
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -16,8 +16,6 @@ const Signup = () => {
                 console.error(" No ID token received from Google");
                 return;
             }
-
-            // 🔹 Send the ID token to Django backend
             const res = await axios.post(
               "http://localhost:8000/api/auth/google-signup/",
               { token: response.credential },  // Changed field name
@@ -33,7 +31,15 @@ const Signup = () => {
             console.error(" Signup failed:", error.response?.data || error);
         }
     };
+    const handleGoogleError = () => {
+        console.log("❌ Google Signup Failed");
+    };
 
+
+    const login = useGoogleLogin({
+        onSuccess: handleGoogleSuccess,
+        onError: handleGoogleError,
+    });
     return (
         <div id="home-container">
             <div className="signup-box">
@@ -71,12 +77,11 @@ const Signup = () => {
                     <span>OR</span>
                 </div>
 
-                {/*  Use GoogleLogin component instead of custom button */}
-                <button className="google-btn" onClick={handleGoogleSuccess}>
-    <img src="/G.webp" alt="Google Logo" className="google-logo" />
-    Sign Up With Google 
-</button>
-
+                {/*updated Google Button */}
+                <button className="google-btn" onClick={() => login()}>
+                    <img src="/G.webp" alt="Google Logo" className="google-logo" />
+                    Sign Up With Google
+                </button>
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>
