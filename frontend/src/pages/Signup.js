@@ -40,17 +40,29 @@ const Signup = () => {
                 <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
 
                 <form className="signup-form">
-                    <label id="worknow1">Name:</label>
-                    <input type="text" placeholder="What should we call you?" className="input-field" />
 
-                    <label id="worknow2">Email:</label>
-                    <input type="email" placeholder="Enter your email" className="input-field" />
 
-                    <label id="worknow3">Password:</label>
-                    <input type="password" placeholder="Create a password" className="input-field" />
+                    <div className="input-container">
+                        <input type="text" placeholder=" " className="input-field" id="name" required />
+                        <label htmlFor="name">Name</label>
+                    </div>
 
-                    <label id="worknow4">Confirm Password:</label>
-                    <input type="password" placeholder="Create a password" className="input-field" />
+                    {/* email input box */}
+                    <div className="input-container">
+                        <input type="email" placeholder=" " className="input-field" id="email" required />
+                        <label htmlFor="email">Email</label>
+                    </div>
+              {/* pw input box */}
+                    <div className="input-container">
+                        <input type="password" placeholder=" " className="input-field" id="password" required />
+                        <label htmlFor="password">Password</label>
+                    </div>
+
+            {/* confirm pw */}
+            <div className="input-container">
+                        <input type="password" placeholder=" " className="input-field" id="confirm-password" required />
+                        <label htmlFor="confirm-password">Confirm Password</label>
+                    </div>
 
                     <button type="submit" className="signup-btn">Sign Up</button>
                 </form>
@@ -60,17 +72,17 @@ const Signup = () => {
                 </div>
 
                 {/*  Use GoogleLogin component instead of custom button */}
-                <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={() => console.log(" Google Signup Failed")}
-                />
+                <button className="google-btn" onClick={handleGoogleSuccess}>
+    <img src="/G.webp" alt="Google Logo" className="google-logo" />
+    Sign Up With Google 
+</button>
+
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>
                 </p>
             </div>
 
-            <p className="footer-text">React + Django Integration</p>
         </div>
     );
 };
