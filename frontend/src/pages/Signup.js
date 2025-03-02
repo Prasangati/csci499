@@ -83,7 +83,6 @@ const Signup = () => {
                 </p>
             </div>
 
-            <p className="footer-text">React + Django Integration</p>
         </div>
     );
 };
