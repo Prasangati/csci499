@@ -210,35 +210,38 @@
 }
 
 .modal-content {
-    position: relative; /* Ensures close button is positioned inside */
+    position: relative; 
 
     background: #bee7e9;
     padding: 30px;
     border-radius: 12px;
     text-align: center;
-    width: 420px; /* Slightly larger */
+    width: 420px; 
     max-width: 90%;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Space out the heading and paragraph */
+
 .modal-content h2 {
     font-size: 22px;
-    margin-bottom: 15px; /* More spacing */
+    margin-bottom: 15px; 
 }
 
 .modal-content p {
     font-size: 16px;
-    line-height: 1.6; /* Improves text readability */
-    margin-bottom: 25px; /* More space before input */
+    line-height: 1.6;
+    margin-bottom: 25px; 
 }
 
 /* Space between input and button */
+
+
 .input-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* Add space between input and button */
+    gap: 20px; 
     width: 100%;
     margin-bottom: 20px; /* More spacing below input */
 }
@@ -276,17 +279,17 @@
 
 .close {
     position: absolute;
-    top: 15px; /* Position inside the modal */
-    right: 20px; /* Align to the right */
+    top: 15px; /* add close inside the modal - to the right */
+    right: 20px; 
     font-size: 24px;
     cursor: pointer;
     background: none;
     border: none;
-    color: #333; /* Darker color for visibility */
+    color: #333; 
     font-weight: bold;
     transition: color 0.2s ease-in-out;
 }
 
 .close:hover {
-    color: #06432c; /* Matches theme */
+    color: #06432c; 
 }
