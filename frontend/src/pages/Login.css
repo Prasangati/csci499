@@ -231,11 +231,12 @@
 .input-container input:not(:placeholder-shown) + label {
     top: 0;
     font-size: 14px;
-    background-color: #bee7e9; /* Match input background */
+    background-color: #bee7e9;
     padding: 0 5px;
     display: inline-block;
     width: auto;
 }
+
 /* Space below the button */
 .reset-message {
     margin-top: 15px;
