@@ -55,16 +55,43 @@
 
 /* Styling input fields */
 .input-field {
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
+    border: 2px solid #066341; 
+    background: transparent; 
+    padding: 18px 12px 6px; 
     font-size: 16px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-    display: block;
-    margin: 0px auto;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
 }
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-container label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    padding: 0 5px;
+    color: #066341;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+}
+
+/* When the input is focused or contains text */
+.input-field:focus + label,
+.input-field:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 14px;
+    background-color: #bee7e9;
+    padding: 0 5px;
+    display: inline-block;
+    width: auto;
+}
+
 
 .input-field:focus {
     border-color: #4A90E2;
