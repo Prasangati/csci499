@@ -50,7 +50,7 @@ const Signup = () => {
 
                     <div className="input-container">
                         <input type="text" placeholder=" " className="input-field" id="name" required />
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">Username</label>
                     </div>
 
                     {/* email input box */}
