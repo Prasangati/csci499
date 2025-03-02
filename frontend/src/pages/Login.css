@@ -1,5 +1,4 @@
-/* Centering the signup container */
-#home-container {
+.home-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,8 +6,7 @@
     height: 100vh;
 }
 
-/* Styling the signup box */
-.signup-box {
+.login-box {
     background: #bee7e9;
     padding: 50px;
     border-radius: 12px;
@@ -20,59 +18,66 @@
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+/* hover effect */
 
-/* Hover effect */
-.signup-box:hover {
+.login-box:hover {
     transform: translateY(-5px);
     box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Styling the welcome image (logo) */
+/* styling Spooons logo */
 .welcome-image {
     width: 350px;
     display: block;
-    margin: 0 auto 20px;
+
 }
 
-/* Styling the signup form */
-.signup-form {
+.login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     gap: 15px;
 }
-
-/* Styling labels */
-.signup-form label {
+.input-container {
+    position: relative;
     width: 100%;
     max-width: 400px;
-    text-align: left;
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-/* Styling input fields */
-.input-field {
+ }
+ .input-container input {
     width: 100%;
-    max-width: 400px;
-    padding: 15px;
+    padding: 18px 12px 6px;
     font-size: 16px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    text-align: left;
-    display: block;
-    margin: 0px auto;
-}
-
-.input-field:focus {
-    border-color: #4A90E2;
+    border: 2px solid #066341;
+    background: transparent;
     outline: none;
+    transition: border-color 0.3s ease-in-out;
+ }
+ .input-container label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    padding: 0 5px;
+    color: #066341;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+ }
+
+ /* for when the input is focused/ has text */
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+   top: 0;
+   font-size: 14px;
+   background-color: #bee7e9; 
+   padding: 0 5px;
+   display: inline-block; 
+   width: auto; 
 }
 
-/* Signup button */
-.signup-btn {
+.login-btn{
     background: #066341;
     color: white;
     padding: 15px;
@@ -86,68 +91,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
-.signup-btn:hover {
+.reset-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    background: #06432c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    margin-top: 10px; /* Space between input and button */
+}
+.login-btn:hover, .reset-btn:hover {
     background: #06432c;
 }
 
-/* Divider between form and Google signup */
-.divider {
-    margin: 20px 0;
-    font-size: 16px;
-    color: #066341;
-    position: relative;
-    text-align: center;
-    width: 100%;
-}
-
-.divider::before,
-.divider::after {
-    content: "";
-    display: inline-block;
-    height: 1px;
-    background: #ddd;
-    width: 40%;
-    vertical-align: middle;
-}
-
-.divider span {
-    display: inline-block;
-    padding: 0 10px;
-    vertical-align: middle;
-}
-
-
-#worknow1{
-    color: rgb(75,75,75);
-    font-weight: bold;
-    height: 10px;
-    font-family: Arial;
-}
-
-#worknow2{
-    color: rgb(75,75,75);
-    font-weight: bold;
-    height: 10px;
-    font-family: Arial;
-}
-
-#worknow3{
-    color: rgb(75,75,75);
-    font-weight: bold;
-    height: 10px;
-    font-family: Arial;
-}
-#worknow4{
-    color: rgb(75,75,75);
-    font-weight: bold;
-    height: 10px;
-    font-family: Arial;
-}
-
-
-/* Google signup button */
 .google-btn {
     display: flex;
     color: white;
@@ -168,35 +130,132 @@
     background: #06432c;
 }
 
-/* Google logo */
 .google-logo {
     width: 30px;
     height: 30px;
     margin-right: 10px;
 }
 
-/* Redirect to signup */
-.signup-text {
-    font-size: 16px;
-    color: #666;
-    margin-top: 15px;
-}
 
-
-
-.signup-link {
-    color: #066341;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.signup-link:hover {
+ 
+ .forgot-password {
+    color: #06432c;
+    font-size: 14px;
+    text-align: right; 
+    cursor: pointer;
+    margin-top: 5px;
+    width: 100%; 
+    display: block;
+ }
+ 
+ 
+ .forgot-password:hover {
     text-decoration: underline;
+ }
+ .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Footer text */
-.footer-text {
-    color: white;
-    margin-top: 20px;
+.modal-content {
+    position: relative; 
+
+    background: #bee7e9;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 420px; 
+    max-width: 90%;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Space out the heading and paragraph */
+
+.modal-content h2 {
+    font-size: 22px;
+    margin-bottom: 15px; 
+}
+
+.modal-content p {
     font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px; 
+}
+
+/* Space between input and button */
+
+
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column; /* Stack input & label */
+    align-items: center;
+    gap: 10px; /* Space between input and button */
+}
+
+.input-container input {
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #06432c;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Label styling similar to Email & Password */
+.input-container label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    background: transparent;
+    padding: 0 5px;
+    color: #06432c;
+    font-size: 16px;
+    transition: 0.3s ease-in-out;
+}
+
+/* When input is focused or has text */
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 14px;
+    background-color: #bee7e9;
+    padding: 0 5px;
+    display: inline-block;
+    width: auto;
+}
+
+/* Space below the button */
+.reset-message {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.close {
+    position: absolute;
+    top: 15px; /* add close inside the modal - to the right */
+    right: 20px; 
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #333; 
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+
+.close:hover {
+    color: #06432c; 
 }
