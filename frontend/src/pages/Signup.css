@@ -177,36 +177,37 @@
 /* Google signup button */
 .google-btn {
     display: flex;
-    color: white;
     align-items: center;
     justify-content: center;
-    background: #066341;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
+    background: #06432c; /* Dark green background */
+    color: white;
+    font-size: 18px;
     font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
     width: 100%;
     max-width: 400px;
+    padding: 18px;
+    transition: background 0.3s ease-in-out;
 }
 
 .google-btn:hover {
-    background: #06432c;
+    background: #066341; /* Slightly lighter green */
 }
 
-/* Google logo */
 .google-logo {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     margin-right: 10px;
 }
 
-/* Redirect to signup */
+
 .signup-text {
     font-size: 16px;
     color: #666;
-    margin-top: 15px;
+    margin-top: 20px; 
+    text-align: center;
 }
 
 

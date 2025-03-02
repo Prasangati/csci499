@@ -72,10 +72,11 @@ const Signup = () => {
                 </div>
 
                 {/*  Use GoogleLogin component instead of custom button */}
-                <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={() => console.log(" Google Signup Failed")}
-                />
+                <button className="google-btn" onClick={handleGoogleSuccess}>
+    <img src="/G.webp" alt="Google Logo" className="google-logo" />
+    Sign Up With Google 
+</button>
+
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>
