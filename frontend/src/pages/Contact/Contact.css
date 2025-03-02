@@ -1,0 +1,124 @@
+
+#main-content {
+    padding-top: 120px;
+    width: 100vw;
+}
+  
+  
+/* Main container for the contact section */
+#contact-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1050px;
+    margin: 50px auto;
+    padding: 50px 20px 20px 20px;
+    gap: 40px;
+}
+  
+/* Left: Contact Form */
+#contact-form-container {
+    flex: 3.5;
+    background: #bee7e9;
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+}
+  
+#contact-form-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+ 
+#contact-page-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact-page-label {
+    font-weight: bold;
+    margin: 10px 0 5px;
+}
+
+#contact-page-input, #contact-page-select, #contact-page-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+} 
+
+#contact-page-select{
+    cursor: pointer;
+}
+
+#contact-page-textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* File Upload */
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+button {
+    background-color: #066341;
+    color: white;
+    padding: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #066341;
+}
+
+/* Right: FAQ Section */
+#contact-message-container {
+    flex: 2.5;
+    background: #bee7e9;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#contact-message-container h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#contact-message-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+#contact-message-container ul li a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+#contact-message-container ul li a:hover {
+    color: #066341;
+}
+
+#view-all-faqs {
+    display: block;
+    margin-top: 10px;
+    color: #066341;
+    font-weight: bold;
+    text-decoration: none;
+}
+#view-all-faqs:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+    color: #066341;
+}

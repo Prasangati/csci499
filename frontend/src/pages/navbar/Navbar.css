@@ -1,0 +1,79 @@
+/* Header */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: linear-gradient(180deg, #bee7e9d5, transparent); 
+  /* background-color: rgba(20, 20, 20, 0.85); */
+  backdrop-filter: blur(30px); 
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 80px;
+}
+
+/* Logo */
+#header-logo img {
+  height: 90px;
+  width: auto;
+  cursor: pointer;
+}
+
+/* Navigation Links */
+#nav-links {
+  
+  display: flex;
+  gap: 40px;
+  margin-right: auto; 
+}
+
+#nav-links a {
+  font-size: 19px;
+  font-weight: bold;
+  font-family: Trebuchet MS;
+  text-decoration: none;
+  color: #066341;
+  transition: 0.3s;
+}
+#home-link{
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+  color: #066341;
+}
+#nav-links a:hover {
+  color: #066341;
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+/* Button Container */
+#button-container {
+  display: flex;
+  gap: 10px; 
+}
+
+#nav-button {
+  width: 98px;
+  height: 40px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #066341;
+  color: white;
+  text-align: center; 
+}
+
+
+#nav-button:hover,
+#nav-button:hover
+{
+  background-color: white;
+  color: #066341;
+}

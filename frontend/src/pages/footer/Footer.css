@@ -1,0 +1,41 @@
+/* Footer */
+#footer {
+  background-color: transparent;
+  color: #066341;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+/* Footer Navigation */
+.nav-links-container {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #066341;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+p {
+  padding-top: 10px;
+}

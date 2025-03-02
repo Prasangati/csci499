@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./Login.css";
-import "../App.css";
+import "../../App.css";
 
 
 
