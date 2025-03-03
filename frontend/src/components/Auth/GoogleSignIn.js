@@ -1,57 +1,35 @@
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useGoogleLogin } from '@react-oauth/google';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const GoogleSignInButton = () => {
+  const navigate = useNavigate();
 
-const GoogleSignIn = () => {
-    const navigate = useNavigate();
+  // Proper success handler
+  const handleGoogleSuccess = async (tokenResponse) => {
+    try {
+      const res = await axios.post(
+        'http://localhost:8000/api/auth/google-signup/',
+        { token: tokenResponse.access_token }, // ✅ Use access_token
+        { withCredentials: true }
+      );
+      res.data.user && navigate('/dashboard');
+    } catch (error) {
+      console.error('Signup failed:', error.response?.data || error);
+    }
+  };
 
-    useEffect(() => {
-        const initializeGoogleSignIn = () => {
-            if (window.google) return;
+  // Initialize Google Login
+  const login = useGoogleLogin({
+    onSuccess: handleGoogleSuccess, // ✅ Direct reference
+    onError: () => console.log('Login Failed'),
+    clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com' // ✅ Required
+  });
 
-            const script = document.createElement('script');
-            script.src = 'https://accounts.google.com/gsi/client';
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
-                window.google.accounts.id.initialize({
-                    client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-                    callback: handleGoogleSuccess
-                });
-            };
-            document.head.appendChild(script);
-        };
-
-        initializeGoogleSignIn();
-    }, []);
-
-    const handleGoogleLogin = () => {
-        window.google.accounts.id.prompt(notification => {
-            if (notification.isNotDisplayed() || notification.isSkipped()) {
-                console.log('Popup blocked/skipped');
-            }
-        });
-    };
-
-    const handleGoogleSuccess = async (response) => {
-        try {
-            const res = await axios.post(
-                'http://localhost:8000/api/auth/google-signup/',
-                { token: response.credential },
-                { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
-            );
-            res.data.user && navigate('/dashboard');
-        } catch (error) {
-            console.error('Signup failed:', error.response?.data || error);
-        }
-    };
-
-    return (
-        <button className="google-btn" onClick={handleGoogleLogin}>
-            <img src="/G.webp" alt="Google Logo" className="google-logo" />
-            Sign Up With Google
-        </button>
-    );
+  return (
+    <button className="google-btn" onClick={login}>
+      <img src="/G.webp" alt="Google Logo" className="google-logo" />
+      Sign Up With Google
+    </button>
+  );
 };
-
-export default GoogleSignIn;
+export default GoogleSignInButton;

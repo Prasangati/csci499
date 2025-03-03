@@ -1,10 +1,10 @@
 import React from "react";
-import { GoogleLogin } from "@react-oauth/google"; // ✅ Use GoogleLogin instead
+import {GoogleLogin, useGoogleLogin} from "@react-oauth/google"; // ✅ Use GoogleLogin instead
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Signup.css"; // Import styles
 import "../App.css";
-
+import GoogleSignIn from "../components/Auth/GoogleSignIn";
 const Signup = () => {
     const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const Signup = () => {
 
         try {
             if (!response.credential) {
-                console.error("❌ No ID token received from Google");
+                console.error(" No ID token received from Google");
                 return;
             }
 
@@ -30,9 +30,11 @@ const Signup = () => {
             console.log("✅ Signup successful:", res.data);
             navigate("/signup-success");
         } catch (error) {
-            console.error("❌ Signup failed:", error.response?.data || error);
+            console.error(" Signup failed:", error.response?.data || error);
         }
     };
+
+
 
     return (
         <div id="home-container">
@@ -64,10 +66,7 @@ const Signup = () => {
                     onSuccess={handleGoogleSuccess}
                     onError={() => console.log("❌ Google Signup Failed")}
                 />
-                <button className="google-btn" onClick={() => login()}>
-                    <img src="/G.webp" alt="Google Logo" className="google-logo"/>
-                    Sign Up With Google
-                </button>
+
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.sites',
     'allauth',
@@ -50,8 +51,10 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'social_django',
     'corsheaders',
-    'api',
 ]
+
+
+AUTH_USER_MODEL = "api.CustomUser"
 
 SITE_ID = 1  # Required by django-allauth
 
@@ -113,7 +116,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 load_dotenv()
 #tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
 
-tmpPostgres = urlparse('postgresql://Spoons_owner:npg_pCelmZOIrN58@ep-lively-voice-a5sd645t-pooler.us-east-2.aws.neon.tech/Spoons?sslmode=require')
+tmpPostgres = urlparse(os.getenv('DATABASE_URL'))
 
 
 DATABASES = {
@@ -126,7 +129,6 @@ DATABASES = {
         'PORT': 5432,
         'OPTIONS': {
             'sslmode': 'require',
-            'options': 'endpoint=ep-lively-voice-a5sd645t-pooler',
         },
     }
 }
