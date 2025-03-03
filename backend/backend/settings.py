@@ -34,11 +34,11 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    'django.contrib.sites',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -64,8 +64,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-"allauth.account.middleware.AccountMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -81,7 +82,6 @@ CORS_EXPOSE_HEADERS = ['Set-Cookie']  # If using cookies
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',  # For social auth
-    'social_core.backends.google.GoogleOAuth2',
 )
 
 
@@ -118,12 +118,16 @@ tmpPostgres = urlparse('postgresql://Spoons_owner:npg_pCelmZOIrN58@ep-lively-voi
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': tmpPostgres.path.replace('/', ''),
         'USER': tmpPostgres.username,
         'PASSWORD': tmpPostgres.password,
         'HOST': tmpPostgres.hostname,
         'PORT': 5432,
+        'OPTIONS': {
+            'sslmode': 'require',
+            'options': 'endpoint=ep-lively-voice-a5sd645t-pooler',
+        },
     }
 }
 
@@ -132,11 +136,15 @@ SOCIALACCOUNT_PROVIDERS = {
     "google": {
         "SCOPE": ["profile", "email"],
         "AUTH_PARAMS": {"access_type": "online"},
+        "APP": {
+            "client_id": os.getenv("CLIENT_ID"),
+            "secret": os.getenv("CLIENT_SECRET"),
+        }
     }
 }
 
 
-GOOGLE_OAUTH_CLIENT_ID = '974911060543-6gsff2mmv7jfakgap4i71rpip850mso7.apps.googleusercontent.com'
+GOOGLE_OAUTH_CLIENT_ID = os.getenv("CLIENT_ID")
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("CLIENT_ID")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("CLIENT_SECRET")
