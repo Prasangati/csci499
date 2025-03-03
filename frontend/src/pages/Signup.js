@@ -3,7 +3,7 @@ import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import "./Signup.css"; 
+import "./Signup.css";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -25,21 +25,16 @@ const Signup = () => {
                 }
              );
 
-            console.log("✅ Signup successful:", res.data);
+            console.log(" Signup successful:", res.data);
             navigate("/signup-success");
         } catch (error) {
             console.error(" Signup failed:", error.response?.data || error);
         }
     };
     const handleGoogleError = () => {
-        console.log("❌ Google Signup Failed");
+        console.log(" Google Signup Failed");
     };
 
-
-    const login = useGoogleLogin({
-        onSuccess: handleGoogleSuccess,
-        onError: handleGoogleError,
-    });
     return (
         <div id="home-container">
             <div className="signup-box">
@@ -77,11 +72,11 @@ const Signup = () => {
                     <span>OR</span>
                 </div>
 
-                {/*updated Google Button */}
-                <button className="google-btn" onClick={() => login()}>
-                    <img src="/G.webp" alt="Google Logo" className="google-logo" />
-                    Sign Up With Google
-                </button>
+                {/* ✅ Use GoogleLogin component instead of custom button */}
+                <GoogleLogin
+                    onSuccess={handleGoogleSuccess}
+                    onError={() => console.log("❌ Google Signup Failed")}
+                />
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>

@@ -1,3 +1,11 @@
+from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
+from api.models import CustomUser
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-# Register your models here.
+
+
+class UserAdmin(BaseUserAdmin):
+    ordering = ('email',)
+
+admin.site.register(CustomUser, UserAdmin)
