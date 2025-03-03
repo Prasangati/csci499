@@ -78,10 +78,10 @@ const Signup = () => {
                 </div>
 
                 {/*updated Google Button */}
-                <button className="google-btn" onClick={() => login()}>
-                    <img src="/G.webp" alt="Google Logo" className="google-logo" />
-                    Sign Up With Google
-                </button>
+                <GoogleLogin
+                    onSuccess={handleGoogleSuccess}
+                    onError={() => console.log("❌ Google Signup Failed")}
+                /> .
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>

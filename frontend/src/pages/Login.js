@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./Login.css";
 import "../App.css";
-
-
-
 
     function Login() {
         const navigate = useNavigate();
@@ -24,7 +21,6 @@ import "../App.css";
        setIsModalOpen(true);
  
     };
-    
      
         const handleLoginSubmit = (event) => {
             event.preventDefault();
@@ -84,9 +80,35 @@ import "../App.css";
         },
         onError: () => console.log("Google Signup Failed"),
     });
+    const handleGoogleError = () => {
+        console.log("❌ Google Login Failed");
+    };
+
+    const handleGoogleSuccess = async (response) => {
+        console.log("🔹 Google OAuth Response:", response);
     
-
-
+        try {
+            if (!response.credential) {
+                console.error("❌ No ID token received from Google");
+                return;
+            }
+    
+            const res = await axios.post(
+                "http://localhost:8000/api/auth/google-signup/",
+                { token: response.credential }, // Sending credential (ID token)
+                {
+                    withCredentials: true,
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+    
+            console.log("✅ Login successful:", res.data);
+            navigate("/Login-success");
+        } catch (error) {
+            console.error("❌ Login failed:", error.response?.data || error);
+        }
+    };
+    
     return (
         <div className="home-container">
             <div className="login-box">
@@ -141,12 +163,11 @@ import "../App.css";
 
 
 
-                {/* Google Signup Button */}
-                <button className="google-btn" onClick={() => googleLogin()}>
-    <img src="/G.webp" alt="Google Logo" className="google-logo" />
-    Continue with Google
-</button>
-
+                {/*updated Google Button */}
+                <GoogleLogin
+    onSuccess={handleGoogleSuccess}
+    onError={() => console.log("❌ Google Login Failed")}
+/>
 
 
 
