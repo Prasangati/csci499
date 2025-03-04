@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGoogleLogin } from "@react-oauth/google";
+import {GoogleLogin, useGoogleLogin} from "@react-oauth/google";
 import axios from "axios";
 import "./Login.css";
 import "../App.css";
@@ -17,13 +17,13 @@ import "../App.css";
 
         const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [resetEmail, setResetEmail] = useState(""); // Store reset email
-    const [resetMessage, setResetMessage] = useState(""); // Store reset success/error message
+        const [resetEmail, setResetEmail] = useState(""); // Store reset email
+        const [resetMessage, setResetMessage] = useState(""); // Store reset success/error message
 
-    const handleForgotPassword = () => {
-       setIsModalOpen(true);
- 
-    };
+        const handleForgotPassword = () => {
+           setIsModalOpen(true);
+
+        };
     
      
         const handleLoginSubmit = (event) => {
@@ -45,6 +45,31 @@ import "../App.css";
                 .finally(() => setLoading(false));
         };
 
+         const handleGoogleSuccess = async (response) => {
+        console.log("🔹 Google OAuth Response:", response);
+
+        try {
+            if (!response.credential) {
+                console.error(" No ID token received from Google");
+                return;
+            }
+            const res = await axios.post(
+              "http://localhost:8000/api/auth/google-signup/",
+              { token: response.credential },  // Changed field name
+          {
+                withCredentials: true,
+                headers: { "Content-Type": "application/json" },
+                }
+             );
+
+            console.log(" Signup successful:", res.data);
+            navigate("/signup-success");
+        } catch (error) {
+            console.error(" Signup failed:", error.response?.data || error);
+        }
+        };
+
+
         //fucntion for handling pwReset
         const handleResetPassword = () => {
             if (!resetEmail) {
@@ -63,35 +88,15 @@ import "../App.css";
         };
         
     // Handle Google OAuth login when the button is clicked
-    const googleLogin = useGoogleLogin({
-        onSuccess: async (response) => {
-            console.log("Google Login Response:", response);
-    
-            try {
-                // Send Google token to backend
-                const res = await axios.post(
-                    `${process.env.REACT_APP_BACKEND_URL}/auth/google-signup/`,
 
-                    { access_token: response.access_token }, 
-                    { withCredentials: true }
-                );
-    
-                console.log("Google Login Success:", res.data);
-                navigate("/dashboard"); // Redirect after Google login
-            } catch (error) {
-                console.error("Google login failed:", error.response?.data || error);
-            }
-        },
-        onError: () => console.log("Google Signup Failed"),
-    });
     
 
 
     return (
-        <div className="home-container">
+        <div id="home-container">
             <div className="login-box">
-                <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
-                
+                <img src="/logo.png" alt="Welcome Logo" className="welcome-image"/>
+
                 {/* Error Message */}
                 {error && <p className="error-message">{error}</p>}
 
@@ -126,69 +131,92 @@ import "../App.css";
                         <label htmlFor="password">Password</label>
                     </div>
                     <p className="forgot-password" onClick={handleForgotPassword}>
-    Forgot Password?
-</p>
+                        Forgot Password?
+                    </p>
 
-     {/* Login Button */}
-     <button type="submit" className="login-btn">
-                       Login
-                   </button>
-                   </form>
+                    {/* Login Button */}
+                    <button type="submit" className="login-btn">
+                        Login
+                    </button>
+                </form>
                 {/* Divider */}
                 <div className="divider">
                     <span>OR</span>
                 </div>
 
 
-
                 {/* Google Signup Button */}
-                <button className="google-btn" onClick={() => googleLogin()}>
-    <img src="/G.webp" alt="Google Logo" className="google-logo" />
-    Continue with Google
-</button>
-
-
-
-
-       {/* dont have an account- Signup Button */}
-                <p className="signup-text">
-                   Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
-               </p>
+                <div
+                    style={{
+                        width: "100%",
+                        maxWidth: "400px",
+                        height: "100%",  // Adjust height as needed
+                        borderRadius: "4px",  // Optional: for rounded corners
+                        overflow: "hidden"  // Ensures child components stay within bounds
+                    }}
+                >
+                    <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={() => console.log("❌ Google Signup Failed")}
+                    />
                 </div>
 
 
-                {isModalOpen && (
-               <div className="modal">
-                   <div className="modal-content">
-                       <button className="close" onClick={() => setIsModalOpen(false)}>&times;</button>
-                       <h2>Forgot Password?</h2>
-                       <p>Enter your email below and we'll send you a link to reset your password.</p>
-
-
-                       <div className="input-container">
-                           <input
-                               type="email"
-                               id="reset-email"
-                               className="input-field"
-                               placeholder=" "
-                               value={resetEmail}
-                               onChange={(e) => setResetEmail(e.target.value)}
-                               required
-                           />
-                           <label htmlFor="reset-email">Email address</label>
-                       </div>
-
-
-                       <button className="reset-btn" onClick={handleResetPassword}>Get Reset Link</button>
-                       <p className="reset-message">{resetMessage}</p>
-                   </div>
-              
-                   </div>
-                )}
+                {/* dont have an account- Signup Button */}
+                <p className="signup-text" id="movemessage">
+                    Don't have an account? <a href="/signup" className="signup-link">Sign Up</a>
+                </p>
 
 
             </div>
+
+
+            {isModalOpen && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <button className="close" onClick={() => setIsModalOpen(false)}>&times;</button>
+                        <h2>Forgot Password?</h2>
+                        <p>Enter your email below and we'll send you a link to reset your password.</p>
+
+
+                        <div className="input-container">
+                            <input
+                                type="email"
+                                id="reset-email"
+                                className="input-field"
+                                placeholder=" "
+                                value={resetEmail}
+                                onChange={(e) => setResetEmail(e.target.value)}
+                                required
+                            />
+                            <label htmlFor="reset-email">Email address</label>
+                        </div>
+
+
+                        <button className="reset-btn" onClick={handleResetPassword}>Get Reset Link</button>
+                        <p className="reset-message">{resetMessage}</p>
+                    </div>
+
+
+
+
+                </div>
+            )}
+
+            <div
+                style={{
+                    width: "100%",
+                    maxWidth: "400px",
+                    height: "100%",  // Adjust height as needed
+                    borderRadius: "4px",  // Optional: for rounded corners
+                    overflow: "hidden"  // Ensures child components stay within bounds
+                }}
+            >
+            </div>
+
+
+        </div>
     );
-}
+    }
 
 export default Login;

@@ -53,16 +53,10 @@ def google_signup(request):
             email = id_info.get('email')
             if not email:
                 return JsonResponse({"error": "Email not found in token"}, status=400)
-            username = email.split('@')[0]
 
-            counter = 1
-            while User.objects.filter(username=username).exists():
-                username = f"{email.split('@')[0]}_{counter}"
-                counter += 1
 
             # Create/update user
             user, created = User.objects.get_or_create(
-                username=username,
                 email=email,
                 defaults={
                     "first_name": id_info.get('given_name', ''),

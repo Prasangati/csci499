@@ -1,9 +1,8 @@
-.home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+#home-container {
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
 }
 
 .login-box {
@@ -71,10 +70,10 @@
 .input-container input:not(:placeholder-shown) + label {
    top: 0;
    font-size: 14px;
-   background-color: #bee7e9; 
+   background-color: #bee7e9;
    padding: 0 5px;
-   display: inline-block; 
-   width: auto; 
+   display: inline-block;
+   width: auto;
 }
 
 .login-btn{
@@ -137,18 +136,18 @@
 }
 
 
- 
+
  .forgot-password {
     color: #06432c;
     font-size: 14px;
-    text-align: right; 
+    text-align: right;
     cursor: pointer;
     margin-top: 5px;
-    width: 100%; 
+    width: 100%;
     display: block;
  }
- 
- 
+
+
  .forgot-password:hover {
     text-decoration: underline;
  }
@@ -165,13 +164,13 @@
 }
 
 .modal-content {
-    position: relative; 
+    position: relative;
 
     background: #bee7e9;
     padding: 30px;
     border-radius: 12px;
     text-align: center;
-    width: 420px; 
+    width: 420px;
     max-width: 90%;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
 }
@@ -180,13 +179,13 @@
 
 .modal-content h2 {
     font-size: 22px;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
 }
 
 .modal-content p {
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 25px; 
+    margin-bottom: 25px;
 }
 
 /* Space between input and button */
@@ -207,8 +206,8 @@
     padding: 14px 12px;
     font-size: 16px;
     border-radius: 8px;
-    border: 2px solid #06432c;
-    background: transparent;
+    border: 1px solid #06432c;
+    background: #F2F2F2;
     outline: none;
     transition: border-color 0.3s ease-in-out;
 }
@@ -221,7 +220,7 @@
     transform: translateY(-50%);
     background: transparent;
     padding: 0 5px;
-    color: #06432c;
+    color: #848484;
     font-size: 16px;
     transition: 0.3s ease-in-out;
 }
@@ -246,16 +245,20 @@
 .close {
     position: absolute;
     top: 15px; /* add close inside the modal - to the right */
-    right: 20px; 
+    right: 20px;
     font-size: 24px;
     cursor: pointer;
     background: none;
     border: none;
-    color: #333; 
+    color: #333;
     font-weight: bold;
     transition: color 0.2s ease-in-out;
 }
 
 .close:hover {
-    color: #06432c; 
+    color: #06432c;
+}
+
+#movemessage{
+    margin-top: 15px;
 }

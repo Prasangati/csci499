@@ -1,9 +1,10 @@
 import React from "react";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import "./Signup.css";
+import CustomGoogleButton from "../components/Auth/CustomGoogleButton";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -31,37 +32,35 @@ const Signup = () => {
             console.error(" Signup failed:", error.response?.data || error);
         }
     };
-    const handleGoogleError = () => {
-        console.log(" Google Signup Failed");
-    };
+
 
     return (
         <div id="home-container">
             <div className="signup-box">
-                <img src="/logo.png" alt="Welcome Logo" className="welcome-image" />
+                <img src="/logo.png" alt="Welcome Logo" className="welcome-image"/>
 
                 <form className="signup-form">
 
 
                     <div className="input-container">
-                        <input type="text" placeholder=" " className="input-field" id="name" required />
-                        <label htmlFor="name">Username</label>
+                        <input type="text" placeholder=" " className="input-field" id="name" required/>
+                        <label htmlFor="name">Name</label>
                     </div>
 
                     {/* email input box */}
                     <div className="input-container">
-                        <input type="email" placeholder=" " className="input-field" id="email" required />
+                        <input type="email" placeholder=" " className="input-field" id="email" required/>
                         <label htmlFor="email">Email</label>
                     </div>
-              {/* pw input box */}
+                    {/* pw input box */}
                     <div className="input-container">
-                        <input type="password" placeholder=" " className="input-field" id="password" required />
+                        <input type="password" placeholder=" " className="input-field" id="password" required/>
                         <label htmlFor="password">Password</label>
                     </div>
 
-            {/* confirm pw */}
-            <div className="input-container">
-                        <input type="password" placeholder=" " className="input-field" id="confirm-password" required />
+                    {/* confirm pw */}
+                    <div className="input-container">
+                        <input type="password" placeholder=" " className="input-field" id="confirm-password" required/>
                         <label htmlFor="confirm-password">Confirm Password</label>
                     </div>
 
@@ -73,10 +72,20 @@ const Signup = () => {
                 </div>
 
                 {/* ✅ Use GoogleLogin component instead of custom button */}
-                <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={() => console.log("❌ Google Signup Failed")}
-                />
+                <div
+                    style={{
+                        width: "100%",
+                        maxWidth: "400px",
+                        height: "100%",  // Adjust height as needed
+                        borderRadius: "4px",  // Optional: for rounded corners
+                        overflow: "hidden"  // Ensures child components stay within bounds
+                    }}
+                >
+                    <GoogleLogin
+                        onSuccess={handleGoogleSuccess}
+                        onError={() => console.log("❌ Google Signup Failed")}
+                    />
+                </div>
 
                 <p className="login-text">
                     Already have an account? <a href="/login" className="login-link">Login</a>
