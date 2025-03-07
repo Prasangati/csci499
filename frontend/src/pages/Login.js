@@ -14,9 +14,7 @@ import "../App.css";
         const [password, setPassword] = useState("");
         const [error, setError] = useState(""); //store error messages
         const [loading, setLoading] = useState(false); // for preventing multiple requests
-
         const [isModalOpen, setIsModalOpen] = useState(false);
-
         const [resetEmail, setResetEmail] = useState(""); // Store reset email
         const [resetMessage, setResetMessage] = useState(""); // Store reset success/error message
 
@@ -202,18 +200,6 @@ import "../App.css";
 
                 </div>
             )}
-
-            <div
-                style={{
-                    width: "100%",
-                    maxWidth: "400px",
-                    height: "100%",  // Adjust height as needed
-                    borderRadius: "4px",  // Optional: for rounded corners
-                    overflow: "hidden"  // Ensures child components stay within bounds
-                }}
-            >
-            </div>
-
 
         </div>
     );
