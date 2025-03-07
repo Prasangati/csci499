@@ -47,38 +47,14 @@ table {
 	border-spacing: 0;
 }
 
-
-
-
 * {
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
  }
  
- @keyframes gradientFlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 75%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 25%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
- }
- 
  body {
-  background: linear-gradient(135deg, #f1f6f6, #b6fbff, #7da8ad, #54c9e0);
+  background: #bee7e9;
   background-size: 300% 300%;
-  animation: gradientFlow 8s ease infinite;
- 
- 
   display: flex;
   justify-content: center;
   align-items: center;
