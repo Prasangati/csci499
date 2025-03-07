@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {GoogleLogin, useGoogleLogin} from "@react-oauth/google";
+import {GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./Login.css";
 import "../App.css";
@@ -14,9 +14,7 @@ import "../App.css";
         const [password, setPassword] = useState("");
         const [error, setError] = useState(""); //store error messages
         const [loading, setLoading] = useState(false); // for preventing multiple requests
-
         const [isModalOpen, setIsModalOpen] = useState(false);
-
         const [resetEmail, setResetEmail] = useState(""); // Store reset email
         const [resetMessage, setResetMessage] = useState(""); // Store reset success/error message
 
@@ -25,26 +23,36 @@ import "../App.css";
 
         };
     
-     
         const handleLoginSubmit = (event) => {
             event.preventDefault();
-            setError(""); 
-            setLoading(true); 
-            console.log("Logging in with:", { email, password });
-
-    
+            setError("");
+        
+            // Regular Expression to Validate Email
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+            if (!emailPattern.test(email)) {
+                setError("Please enter a valid email address.");
+                return;
+            }
+        
+            setLoading(true);
+        
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login/`, { email, password })
-                .then((res) => {
-                    console.log("Login Success:", res.data);
-                    navigate("/dashboard"); // Redirect after successful login
-                })
+                .then(() => navigate("/dashboard"))
                 .catch((error) => {
-                    setError("Invalid email or password. Please try again.");
-                    console.error("Login failed:", error.response?.data || error);
+                    if (error.response) {
+                        if (error.response.status === 401) {
+                            setError("Invalid email or password. Please try again.");
+                        } else {
+                            setError("Something went wrong. Please try again later.");
+                        }
+                    } else {
+                        setError("Network error. Please check your internet connection.");
+                    }
                 })
                 .finally(() => setLoading(false));
         };
-
+        
          const handleGoogleSuccess = async (response) => {
         console.log("🔹 Google OAuth Response:", response);
 
@@ -72,25 +80,21 @@ import "../App.css";
 
         //fucntion for handling pwReset
         const handleResetPassword = () => {
+            setResetMessage("");  
+        
             if (!resetEmail) {
                 setResetMessage("Please enter your email.");
                 return;
             }
-        
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/password-reset/`, { email: resetEmail })
-                .then(() => {
-                    setResetMessage("A reset link has been sent to your email.");
-                })
-                .catch((error) => {
-                    setResetMessage("Failed to send reset email. Please try again.");
-                    console.error("Reset failed:", error.response?.data || error);
-                });
+            .then(() => {
+                setResetMessage("A reset link has been sent to your email.");
+                setTimeout(() => setIsModalOpen(false), 2000); // after the reset is sucessful the modal closes 
+            })
+            .catch(() => setResetMessage("Failed to send reset email. Please try again."));
         };
         
-    // Handle Google OAuth login when the button is clicked
-
-    
-
+        
 
     return (
         <div id="home-container">
@@ -202,18 +206,6 @@ import "../App.css";
 
                 </div>
             )}
-
-            <div
-                style={{
-                    width: "100%",
-                    maxWidth: "400px",
-                    height: "100%",  // Adjust height as needed
-                    borderRadius: "4px",  // Optional: for rounded corners
-                    overflow: "hidden"  // Ensures child components stay within bounds
-                }}
-            >
-            </div>
-
 
         </div>
     );
