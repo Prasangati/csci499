@@ -1,9 +1,12 @@
 import React from "react";
+import "./Dashboard.css"; 
 
-
-function Home() {
-   return <h1> dashboard after logging to account </h1>;
+function Dashboard() {
+    return (
+        <div className="dashboard-container">
+            <h1>Welcome Back</h1>
+        </div>
+    );
 }
 
-
-export default Home;
+export default Dashboard;
