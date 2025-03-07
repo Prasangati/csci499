@@ -26,10 +26,19 @@ import "../App.css";
         const handleLoginSubmit = (event) => {
             event.preventDefault();
             setError("");
+        
+            // Regular Expression to Validate Email
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+            if (!emailPattern.test(email)) {
+                setError("Please enter a valid email address.");
+                return;
+            }
+        
             setLoading(true);
-    
+        
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login/`, { email, password })
-                .then(() => navigate("/dashboard")) // Redirect on success
+                .then(() => navigate("/dashboard"))
                 .catch((error) => {
                     if (error.response) {
                         if (error.response.status === 401) {
@@ -43,6 +52,7 @@ import "../App.css";
                 })
                 .finally(() => setLoading(false));
         };
+        
          const handleGoogleSuccess = async (response) => {
         console.log("🔹 Google OAuth Response:", response);
 
