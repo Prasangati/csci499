@@ -76,10 +76,12 @@ import "../App.css";
                 setResetMessage("Please enter your email.");
                 return;
             }
-        
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/password-reset/`, { email: resetEmail })
-                .then(() => setResetMessage("A reset link has been sent to your email."))
-                .catch(() => setResetMessage("Failed to send reset email. Please try again."));
+            .then(() => {
+                setResetMessage("A reset link has been sent to your email.");
+                setTimeout(() => setIsModalOpen(false), 2000); // after the reset is sucessful the modal closes 
+            })
+            .catch(() => setResetMessage("Failed to send reset email. Please try again."));
         };
         
         
