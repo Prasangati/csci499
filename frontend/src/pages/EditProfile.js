@@ -1,11 +1,61 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import "../EditProfile.css";
 
-const EditProfile = () => {
-    const navigate = useNavigate();
+const EditProfile = ({ userId }) => {
+  const [profile, setProfile] = useState({ username: "", email: "", password: "", bio: "" });
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
+
+    // Fetch user profile data on mount
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(`/api/users/${userId}`);
+        setProfile({
+          username: response.data.username || "",
+          email: response.data.email || "",
+          bio: response.data.bio || "",
+        });
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+        setMessage("Failed to load profile.");
+      }
+    };
+    fetchProfile();
+  }, [userId]);
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setProfile({ ...profile, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const response = await axios.patch(`/api/users/${userId}`, profile);
+      if (response.status === 200) {
+        setMessage("Profile updated successfully!");
+        setTimeout(() => navigate(`/profile/${userId}`), 1000);
+      } else {
+        setMessage("Failed to update profile.");
+      }
+    } catch (error) {
+      setMessage("Error updating profile.");
+      console.error("Update error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
     return (
         <div className="edit-profile-container">
             <form className="edit-profile-form">
