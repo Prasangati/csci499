@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {GoogleLogin, useGoogleLogin} from "@react-oauth/google";
+import {GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import "./Login.css";
 import "../App.css";
@@ -70,20 +70,18 @@ import "../App.css";
 
         //fucntion for handling pwReset
         const handleResetPassword = () => {
+            setResetMessage("");  
+        
             if (!resetEmail) {
                 setResetMessage("Please enter your email.");
                 return;
             }
         
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/password-reset/`, { email: resetEmail })
-                .then(() => {
-                    setResetMessage("A reset link has been sent to your email.");
-                })
-                .catch((error) => {
-                    setResetMessage("Failed to send reset email. Please try again.");
-                    console.error("Reset failed:", error.response?.data || error);
-                });
+                .then(() => setResetMessage("A reset link has been sent to your email."))
+                .catch(() => setResetMessage("Failed to send reset email. Please try again."));
         };
+        
         
 
     return (
