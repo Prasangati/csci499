@@ -23,26 +23,26 @@ import "../App.css";
 
         };
     
-     
         const handleLoginSubmit = (event) => {
             event.preventDefault();
-            setError(""); 
-            setLoading(true); 
-            console.log("Logging in with:", { email, password });
-
+            setError("");
+            setLoading(true);
     
             axios.post(`${process.env.REACT_APP_BACKEND_URL}/auth/login/`, { email, password })
-                .then((res) => {
-                    console.log("Login Success:", res.data);
-                    navigate("/dashboard"); // Redirect after successful login
-                })
+                .then(() => navigate("/dashboard")) // Redirect on success
                 .catch((error) => {
-                    setError("Invalid email or password. Please try again.");
-                    console.error("Login failed:", error.response?.data || error);
+                    if (error.response) {
+                        if (error.response.status === 401) {
+                            setError("Invalid email or password. Please try again.");
+                        } else {
+                            setError("Something went wrong. Please try again later.");
+                        }
+                    } else {
+                        setError("Network error. Please check your internet connection.");
+                    }
                 })
                 .finally(() => setLoading(false));
         };
-
          const handleGoogleSuccess = async (response) => {
         console.log("🔹 Google OAuth Response:", response);
 
@@ -85,10 +85,6 @@ import "../App.css";
                 });
         };
         
-    // Handle Google OAuth login when the button is clicked
-
-    
-
 
     return (
         <div id="home-container">
