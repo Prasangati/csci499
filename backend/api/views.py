@@ -20,18 +20,11 @@ def google_signup(request):
             print(f"Raw request body: {raw_body}")
 
             # Parse JSON with error handling
-            try:
-                data = json.loads(raw_body.decode('utf-8'))
-            except json.JSONDecodeError as e:
-                print(f"JSON Error: {str(e)}")
-                return JsonResponse({"error": "Invalid JSON format"}, status=400)
+
+            data = json.loads(raw_body.decode('utf-8'))
 
             # Extract token
             token = data.get("token")
-            print(f"Extracted token: {token[:10]}...")  # Log first 10 chars for security
-
-            if not token:
-                return JsonResponse({"error": "No token provided"}, status=400)
 
             # Verify token
             try:

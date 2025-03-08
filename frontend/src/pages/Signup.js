@@ -10,7 +10,7 @@ const Signup = () => {
     const navigate = useNavigate();
 
     const handleGoogleSuccess = async (response) => {
-        console.log("🔹 Google OAuth Response:", response);
+        console.log(" Google OAuth Response:", response);
 
         try {
             if (!response.credential) {
@@ -27,7 +27,7 @@ const Signup = () => {
              );
 
             console.log(" Signup successful:", res.data);
-            navigate("/signup-success");
+            navigate("/signup-success", { state: { user: res.data.user } });
         } catch (error) {
             console.error(" Signup failed:", error.response?.data || error);
         }
@@ -83,7 +83,7 @@ const Signup = () => {
                 >
                     <GoogleLogin
                         onSuccess={handleGoogleSuccess}
-                        onError={() => console.log("❌ Google Signup Failed")}
+                        onError={() => console.log(" Google Signup Failed")}
                     />
                 </div>
 
