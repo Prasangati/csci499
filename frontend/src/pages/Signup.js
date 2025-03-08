@@ -1,13 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import "./Signup.css";
-import CustomGoogleButton from "../components/Auth/CustomGoogleButton";
+//import CustomGoogleButton from "../components/Auth/CustomGoogleButton";
 
-const Signup = () => {
-    const navigate = useNavigate();
+
+
+
+    const Signup = () => {
+        const navigate = useNavigate();
+        const [formData, setFormData] = useState({
+            name: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+        });
+        const [error, setError] = useState("");
+        const handleChange = (e) => {
+            setFormData({ ...formData, [e.target.id]: e.target.value });
+        };
+        
+        const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
+        const isValidPassword = (password) => password.length >= 8;
+
+        const handleSignupSubmit = async (e) => {
+            e.preventDefault();
+            setError(""); 
+    
+            const { name, email, password, confirmPassword } = formData;
+    
+            // user inputs validation
+            if (!name.trim()) {
+                setError("Name is required.");
+                return;
+            }
+            if (!isValidEmail(email)) {
+                setError("Enter a valid email address.");
+                return;
+            }
+            if (!isValidPassword(password)) {
+                setError("Password must be at least 8 characters long.");
+                return;
+            }
+            if (password !== confirmPassword) {
+                setError("Passwords do not match.");
+                return;
+            }
+            try {
+                const response = await axios.post(
+                    `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup/`,
+                    { name, email, password },
+                    { withCredentials: true, headers: { "Content-Type": "application/json" } }
+                );
+    
+                console.log(" Signup successful:", response.data);
+                navigate("/signup-success");
+            } catch (error) {
+                console.error("Signup failed:", error.response?.data || error);
+                setError(error.response?.data?.message || "Signup failed. Please try again.");
+            }
+        };
+    
 
     const handleGoogleSuccess = async (response) => {
         console.log("🔹 Google OAuth Response:", response);
@@ -39,29 +94,63 @@ const Signup = () => {
             <div className="signup-box">
                 <img src="/logo.png" alt="Welcome Logo" className="welcome-image"/>
 
-                <form className="signup-form">
+                <form className="signup-form" onSubmit={handleSignupSubmit}>
+                {error && <p className="error-message">{error}</p>}
 
-
-                    <div className="input-container">
-                        <input type="text" placeholder=" " className="input-field" id="name" required/>
-                        <label htmlFor="name">Name</label>
-                    </div>
+                <div className="input-container">
+                        <input
+                            type="text"
+                            placeholder=" "
+                            className="input-field"
+                            id="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                          <label htmlFor="name">Name</label>
+                          </div>
+        
 
                     {/* email input box */}
                     <div className="input-container">
-                        <input type="email" placeholder=" " className="input-field" id="email" required/>
+                        <input
+                            type="email"
+                            placeholder=" "
+                            className="input-field"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
                         <label htmlFor="email">Email</label>
                     </div>
+
                     {/* pw input box */}
                     <div className="input-container">
-                        <input type="password" placeholder=" " className="input-field" id="password" required/>
+                        <input
+                            type="password"
+                            placeholder=" "
+                            className="input-field"
+                            id="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
                         <label htmlFor="password">Password</label>
                     </div>
 
                     {/* confirm pw */}
                     <div className="input-container">
-                        <input type="password" placeholder=" " className="input-field" id="confirm-password" required/>
-                        <label htmlFor="confirm-password">Confirm Password</label>
+                        <input
+                            type="password"
+                            placeholder=" "
+                            className="input-field"
+                            id="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label htmlFor="confirmPassword">Confirm Password</label>
                     </div>
 
                     <button type="submit" className="signup-btn">Sign Up</button>
