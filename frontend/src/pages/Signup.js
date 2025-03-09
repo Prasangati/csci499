@@ -19,18 +19,18 @@ import "./Signup.css";
         });
         const [error, setError] = useState("");
         const handleChange = (e) => {
-            setFormData({ ...formData, [e.target.id]: e.target.value });
+            setFormData({...formData, [e.target.id]: e.target.value});
         };
-        
+
         const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
         const isValidPassword = (password) => password.length >= 8;
 
         const handleSignupSubmit = async (e) => {
             e.preventDefault();
-            setError(""); 
-    
-            const { name, email, password, confirmPassword } = formData;
-    
+            setError("");
+
+            const {name, email, password, confirmPassword} = formData;
+
             // user inputs validation
             if (!name.trim()) {
                 setError("Name is required.");
@@ -50,11 +50,11 @@ import "./Signup.css";
             }
             try {
                 const response = await axios.post(
-                    `${process.env.REACT_APP_BACKEND_URL}/api/auth/signup/`,
-                    { name, email, password },
-                    { withCredentials: true, headers: { "Content-Type": "application/json" } }
+                    "http://localhost:8000/api/auth/signup/",
+                    {name, email, password},
+                    {withCredentials: true, headers: {"Content-Type": "application/json"}}
                 );
-    
+
                 console.log(" Signup successful:", response.data);
                 navigate("/signup-success");
             } catch (error) {
@@ -62,6 +62,8 @@ import "./Signup.css";
                 setError(error.response?.data?.message || "Signup failed. Please try again.");
             }
         };
+
+
     
 
     const handleGoogleSuccess = async (response) => {
