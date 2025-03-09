@@ -3,6 +3,7 @@ import traceback  # Add at top of file
 from django.contrib.auth import get_user_model, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_GET
 from django.conf import settings
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
@@ -73,9 +74,6 @@ def google_signup(request):
 @csrf_exempt
 def signup(request):
     # Only allow POST requests
-    User = get_user_model()
-    if User.is_authenticated:
-        print("user is loggedin")
 
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
@@ -143,3 +141,24 @@ def signup(request):
             "last_name": user.last_name
         }
     })
+
+@require_GET
+def authcontext(request):
+    if request.user.is_authenticated:
+        # Prepare a user info object with the data you want to expose.
+        user_info = {
+            'email': request.user.email,
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            # You can include other fields as needed.
+        }
+        return JsonResponse({
+            'isAuthenticated': True,
+            'user': user_info
+        })
+    else:
+        return JsonResponse({
+            'isAuthenticated': False,
+            'user': None
+        })
+

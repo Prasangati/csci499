@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import "./Signup.css";
+import useAuth from "../hooks/useAuth"
 //import CustomGoogleButton from "../components/Auth/CustomGoogleButton";
 
 
@@ -90,8 +91,19 @@ import "./Signup.css";
         }
     };
 
+    if (useAuth()){
+        navigate("/")
+    }
+
+    else{
+
+
 
     return (
+
+
+
+
         <div id="home-container">
             <div className="signup-box">
                 <img src="/logo.png" alt="Welcome Logo" className="welcome-image"/>
@@ -184,7 +196,7 @@ import "./Signup.css";
             </div>
 
         </div>
-    );
+    );};
 };
 
 export default Signup;
