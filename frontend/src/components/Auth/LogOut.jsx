@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 
 const LogOut = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -12,8 +13,14 @@ const LogOut = () => {
         {},
         { withCredentials: true }
       );
-      // After a successful logout, redirect the user to the login page.
-      navigate('/login');
+      // After a successful logout, check if we are on the home route.
+      if (location.pathname === "/") {
+        // If already at home, force a reload so that context updates.
+        window.location.reload();
+      } else {
+        // Otherwise, navigate to home.
+        navigate("/");
+      }
     } catch (error) {
       console.error("Logout failed:", error);
     }

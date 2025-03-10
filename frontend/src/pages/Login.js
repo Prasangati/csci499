@@ -37,13 +37,13 @@ function Login() {
     setIsModalOpen(true);
   };
 
-  const handleLoginSubmit = (event) => {
+
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
     setError("");
 
     // Regular Expression to Validate Email
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
     if (!emailPattern.test(email)) {
       setError("Please enter a valid email address.");
       return;
@@ -51,22 +51,31 @@ function Login() {
 
     setLoadingLocal(true);
 
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/auth/login/`, { email, password })
-      .then(() => navigate("/dashboard"))
-      .catch((error) => {
-        if (error.response) {
-          if (error.response.status === 401) {
-            setError("Invalid email or password. Please try again.");
-          } else {
-            setError("Something went wrong. Please try again later.");
-          }
+    try {
+      await axios.post(
+        "http://localhost:8000/api/auth/login/",
+        { email, password },
+        { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      );
+      // Only navigate on successful login
+      navigate("/");
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          setError("Invalid email or password. Please try again.");
         } else {
-          setError("Network error. Please check your internet connection.");
+          setError("Something went wrong. Please try again later.");
         }
-      })
-      .finally(() => setLoadingLocal(false));
-  };
+      } else {
+        setError("Network error. Please check your internet connection.");
+      }
+    } finally {
+      setLoadingLocal(false);
+    }
+};
+
+
+
 
   // Function for handling password reset
   const handleResetPassword = () => {

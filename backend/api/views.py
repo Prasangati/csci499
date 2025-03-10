@@ -1,9 +1,9 @@
 import json
 import traceback  # Add at top of file
-from django.contrib.auth import get_user_model, login
-from django.http import JsonResponse
+from django.contrib.auth import get_user_model, login, logout, authenticate
+from django.http import JsonResponse, HttpResponseNotAllowed
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.conf import settings
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
@@ -73,65 +73,50 @@ def google_signup(request):
 
 @csrf_exempt
 def signup(request):
-    # Only allow POST requests
-
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
 
-    # Parse the JSON body
     try:
         data = json.loads(request.body.decode("utf-8"))
     except json.JSONDecodeError:
         return JsonResponse({"error": "Invalid JSON body."}, status=400)
 
-
-    # Extract and validate required fields
     email = data.get("email")
     full_name = data.get("name", "").strip()
     password = data.get("password")
-
-
-
     if not email or not full_name or not password:
         return JsonResponse({"error": "Email, name, and password are required."}, status=400)
 
-    # Split the full name into first and last name if a space is present
     if " " in full_name:
-        first_name, last_name = full_name.split(" ", 1)  # split only at the first space
+        first_name, last_name = full_name.split(" ", 1)
     else:
         first_name = full_name
         last_name = ""
 
     User = get_user_model()
 
-    # Check if a user with the given email already exists
     try:
-
         User.objects.get(email=email)
-
         return JsonResponse({"error": "Email already exists."}, status=400)
     except User.DoesNotExist:
-        pass  # No user exists, so continue with signup
+        pass
 
-    # Create the new user and log them in
-    print("Test: 1")
     try:
-        user = User.objects.create_user(
+        # Create the new user
+        User.objects.create_user(
             email=email,
             first_name=first_name,
             last_name=last_name,
             password=password
         )
-        print("successfuly created user")
-        print(user)
-        user = User.objects.get(email=email)
-        login(request, user)
-
+        # Authenticate the user using the credentials
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)  # login now sets the backend automatically
+        else:
+            return JsonResponse({"error": "Authentication failed."}, status=400)
     except Exception as e:
-        print("error problem")
         return JsonResponse({"error": f"Error creating user: {e}"}, status=500)
-
-    # Return a success response
 
     return JsonResponse({
         "status": "success",
@@ -163,5 +148,52 @@ def authcontext(request):
         })
 
 
-def logout(request):
-    return
+@csrf_exempt
+def logout_view(request):
+    logout(request)
+    print("Logged out user")
+    return JsonResponse({"message": "Successfully logged out."})
+
+
+@csrf_exempt
+def login_view(request):
+    # Allow only POST requests
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+
+    # Parse JSON body
+    try:
+        data = json.loads(request.body.decode("utf-8"))
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "Invalid JSON body."}, status=400)
+
+    # Extract email and password from the data
+    email = data.get("email")
+    password = data.get("password")
+    if not email or not password:
+        return JsonResponse({"error": "Email and password are required."}, status=400)
+
+    # Authenticate the user
+    user = authenticate(request, email=email, password=password)
+    if user is None:
+        return JsonResponse({"error": "Invalid email or password."}, status=401)
+    else:
+        print("ok this works.")
+
+    # Log the user in
+    login(request, user)
+    if not user.is_authenticated:
+        print("Not logged in")
+    else:
+        print("work")
+
+
+    # Optionally, return user details upon successful login
+    return JsonResponse({
+        "status": "success",
+        "user": {
+            "email": user.email,
+            "first_name": user.first_name,
+            "last_name": user.last_name
+        }
+    })
