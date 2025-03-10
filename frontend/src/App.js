@@ -4,6 +4,9 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import SignupSuccess from "./pages/SignupSucess"
+import Home from "./pages/Home"
+
+
 const clientId = "974911060543-6gsff2mmv7jfakgap4i71rpip850mso7.apps.googleusercontent.com"; // Replace with actual Client ID
 
 function App() {
@@ -11,6 +14,7 @@ function App() {
         <GoogleOAuthProvider clientId={clientId}>
             <Router>
                 <Routes>
+                    <Route path="/" element={<Home />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup-success" element={<SignupSuccess />} />

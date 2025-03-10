@@ -162,3 +162,6 @@ def authcontext(request):
             'user': None
         })
 
+
+def logout(request):
+    return
