@@ -186,8 +186,6 @@ def login_view(request):
         print("Not logged in")
     else:
         print("work")
-
-
     # Optionally, return user details upon successful login
     return JsonResponse({
         "status": "success",
