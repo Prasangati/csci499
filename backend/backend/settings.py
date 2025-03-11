@@ -129,6 +129,7 @@ DATABASES = {
         'PORT': 5432,
         'OPTIONS': {
             'sslmode': 'require',
+            'options': 'endpoint=ep-lingering-hill-a8wkvoca-pooler',
         },
     }
 }
