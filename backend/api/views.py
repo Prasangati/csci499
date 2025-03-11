@@ -8,6 +8,11 @@ from django.conf import settings
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from datetime import datetime, timezone  # Correct import for UTC handling
+from rest_framework import status
+from .serializers import LoginSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 @csrf_exempt
 def google_signup(request):
@@ -155,43 +160,52 @@ def logout_view(request):
     return JsonResponse({"message": "Successfully logged out."})
 
 
+@api_view(['POST'])
 @csrf_exempt
 def login_view(request):
-    # Allow only POST requests
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
+    serializer = LoginSerializer(data=request.data)
 
-    # Parse JSON body
+    if not serializer.is_valid():
+        return Response(
+            {"errors": serializer.errors},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+    email = serializer.validated_data['email']
+    password = serializer.validated_data['password']
+    User = get_user_model()
+
     try:
-        data = json.loads(request.body.decode("utf-8"))
-    except json.JSONDecodeError:
-        return JsonResponse({"error": "Invalid JSON body."}, status=400)
+        # First check if account exists
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        return Response(
+            {"error": "Account with this email does not exist"},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
-    # Extract email and password from the data
-    email = data.get("email")
-    password = data.get("password")
-    if not email or not password:
-        return JsonResponse({"error": "Email and password are required."}, status=400)
+    # Now check password
+    auth_user = authenticate(request, email=email, password=password)
+    if not auth_user:
+        return Response(
+            {"error": "Incorrect password"},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
-    # Authenticate the user
-    user = authenticate(request, email=email, password=password)
-    if user is None:
-        return JsonResponse({"error": "Invalid email or password."}, status=401)
-    else:
-        print("ok this works.")
+    # Check if account is active
+    if not auth_user.is_active:
+        return Response(
+            {"error": "Account is disabled"},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
-    # Log the user in
-    login(request, user)
-    if not user.is_authenticated:
-        print("Not logged in")
-    else:
-        print("work")
-    # Optionally, return user details upon successful login
-    return JsonResponse({
+    login(request, auth_user)
+
+    return Response({
         "status": "success",
         "user": {
-            "email": user.email,
-            "first_name": user.first_name,
-            "last_name": user.last_name
+            "email": auth_user.email,
+            "first_name": auth_user.first_name,
+            "last_name": auth_user.last_name
         }
     })

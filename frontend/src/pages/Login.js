@@ -10,7 +10,7 @@ import "../App.css";
 function Login() {
   const handleGoogleSuccess = useGoogleSuccess();
   const navigate = useNavigate();
-  const { isAuthenticated, loading } = useAuthContext(); // Get auth state from context
+  const { isAuthenticated, loading, refreshAuth } = useAuthContext(); // Get auth state from context
 
   // Local state for form data and UI state
   const [email, setEmail] = useState("");
@@ -57,21 +57,49 @@ function Login() {
         { email, password },
         { withCredentials: true, headers: { "Content-Type": "application/json" } }
       );
+       refreshAuth();
       // Only navigate on successful login
       navigate("/");
     } catch (error) {
-      if (error.response) {
-        if (error.response.status === 401) {
-          setError("Invalid email or password. Please try again.");
-        } else {
-          setError("Something went wrong. Please try again later.");
-        }
-      } else {
-        setError("Network error. Please check your internet connection.");
+    if (error.response) {
+      // Handle HTTP error status codes
+      switch (error.response.status) {
+        case 401:
+          // Check backend's specific error message
+          const backendError = error.response.data?.error?.toLowerCase();
+
+          if (backendError.includes("account with this email does not exist")) {
+            setError("Account not found. Please check your email address.");
+          } else if (backendError.includes("incorrect password")) {
+            setError("Wrong password. Please try again.");
+          } else if (backendError.includes("account is disabled")) {
+            setError("Account disabled. Contact support.");
+          } else {
+            setError("Invalid credentials. Please try again.");
+          }
+          break;
+
+        case 400:
+          setError("Invalid request. Please check your input.");
+          break;
+
+        case 500:
+          setError("Server error. Please try again later.");
+          break;
+
+        default:
+          setError("Something went wrong. Please try again.");
       }
-    } finally {
-      setLoadingLocal(false);
+    } else if (error.request) {
+      // The request was made but no response was received
+      setError("Network error. Please check your internet connection.");
+    } else {
+      // Something happened in setting up the request
+      setError("Request setup error. Please try again.");
     }
+  } finally {
+    setLoadingLocal(false);
+  }
 };
 
 
