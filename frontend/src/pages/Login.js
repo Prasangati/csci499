@@ -105,22 +105,39 @@ function Login() {
 
 
 
-  // Function for handling password reset
-  const handleResetPassword = () => {
-    setResetMessage("");
+// Function for handling password reset
+    const handleResetPassword = async () => {
+        setResetMessage("");  
 
-    if (!resetEmail) {
-      setResetMessage("Please enter your email.");
-      return;
-    }
-    axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/auth/password-reset/`, { email: resetEmail })
-      .then(() => {
-        setResetMessage("A reset link has been sent to your email.");
-        setTimeout(() => setIsModalOpen(false), 2000); // Close the modal after successful reset
-      })
-      .catch(() => setResetMessage("Failed to send reset email. Please try again."));
-  };
+        if (!resetEmail.trim()) {
+            setResetMessage("Please enter your email.");
+            return;
+        }
+
+        // email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(resetEmail.trim())) {
+            setResetMessage("Please enter a valid email address.");
+            return;
+        }
+         //clear previous request before making new request
+        setResetMessage("Processing reset password request...");
+        try {
+            const response = await axios.post("http://localhost:8000/api/auth/google-signup/", { email: resetEmail.trim() });        
+            if (response.status === 200) {
+                setResetMessage("A reset link has been sent to your email.");
+                setTimeout(() => setIsModalOpen(false), 2000); // after the reset is successful modal closes 
+            } else {
+                setResetMessage("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            if (error.response) {
+                setResetMessage(error.response.data?.message || "Failed to send reset email. Please try again.");
+            } else {
+                setResetMessage("Network error. Please check your connection and try again.");
+            }
+        }
+    };
 
   return (
     <div id="home-container">
