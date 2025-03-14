@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 function Dashboard() {
    // need to figure out how to fetch data from the backend based on the database being used
    return (
+
    // features needed: nav bar, sections: journal entries, progress tracking, etc
    // nav bar needs to be able to switch bw the diff parts of our app
    <div className="dashboard-container">

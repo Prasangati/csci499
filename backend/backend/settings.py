@@ -88,6 +88,20 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Development
+
+EMAIL_HOST = 'smtp.gmail.com'  # See provider list below
+EMAIL_PORT = 587  # Standard port for TLS
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your@gmail.com'
+EMAIL_HOST_PASSWORD = 'your-app-password'
+DEFAULT_FROM_EMAIL = 'noreply@Spoon.com'  # Displayed in recipient's inbox
+SERVER_EMAIL = 'errors@yourdomain.com'  # For admin error notifications
+
+# Frontend URL for password reset links
+FRONTEND_URL = 'http://localhost:3000'  # Your React app's URL
+
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -129,6 +143,7 @@ DATABASES = {
         'PORT': 5432,
         'OPTIONS': {
             'sslmode': 'require',
+            'options': 'endpoint=ep-lingering-hill-a8wkvoca-pooler',
         },
     }
 }
