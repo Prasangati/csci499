@@ -11,7 +11,7 @@ import LogOut from "../../components/Auth/LogOut"; //logout Button
 function Dashboard() {
    const [activeTab, setActiveTab] = useState("Journal");
    const { user } = useAuthContext(); 
-      const [sidebarOpen, setSidebarOpen] = useState(true); // State to toggle sidebar
+   const [sidebarOpen, setSidebarOpen] = useState(true); 
 
 
    return (
