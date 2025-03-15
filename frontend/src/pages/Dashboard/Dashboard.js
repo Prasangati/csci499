@@ -45,12 +45,12 @@ function Dashboard() {
             {/*</div><button className="outline-button">Journal</button>*/}
             {/*<button className="outline-button">Progress</button>*/}
             {/*<button className="outline-button">Resources</button>*/}
-   
+{/*    
         <img 
             src="https://via.placeholder.com/50" 
             alt="User Profile" 
             className="user-profile"
-        />
+        /> */}
         {/* User can click this image to edit profile/log out */}
     </nav>
          {/* tabs*/}

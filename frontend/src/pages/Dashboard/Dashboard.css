@@ -5,51 +5,75 @@
     text-align: center;
     padding: 20px;
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* added lighter background for contrast */
+
 }
 
 .nav-bar {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* added tabs vertically */
+
     align-items: center;
-    background-color: #f8f9fa;
-    padding: 10px 20px;
+    background-color: white;
+    padding: 15px 20px;
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
 }
-.dashboard-heading {
-    font-size: 24px;
+.dashboard-heading { /*title for now*/
+    font-size: 26px;
     font-weight: bold;
     color: #333;
+    margin-bottom: 15px; 
+
 }
 .tabs {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
+
+/* journal - Progress  - resources)
+I slighlty increased sizes for now */
 .tab-button {
-    padding: 10px 15px;
+    padding: 12px 15px;
     border: 2px solid #007bff;
     background: transparent;
     color: #007bff;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
-    transition: all 0.3s ease;
+    font-weight: bold;
+
+    transition: all 0.3s ease; /*hover effect */
+    min-width: 120px; /* Ensures all buttons are the same width */
+    height: 45px; /* Ensures all buttons are the same height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
 }
 .tab-button.active {
-    background-color: #007bff;
+    background-color: #007bff; /* buttons have blue background when currently on that tap*/
     color: white;
+    border: 2px solid #007bff;
+
 }
 
 .tab-button:hover {
-    background-color: #007bff;
+    background-color: #0056b3; /* slightly blue when hover over tap */
     color: white;
 }
-.outline-button {
-    padding: 10px 15px;
+
+
+/* blue border for buttons */
+/* .outline-button {
+    padding: 12px 18px;
     border: 2px solid #007bff;
     background: transparent;
     color: #007bff;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
     transition: all 0.3s ease;
@@ -58,12 +82,13 @@
 .outline-button:hover {
     background-color: #007bff;
     color: white;
-}
+} */
 
-.user-profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #007bff;
+.dashboard-content {
+    margin-top: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* lighter shadow to add depth */
+    min-height: 200px;
 }
