@@ -2,7 +2,7 @@
     display: flex;
     width: 100vw;
     height: 100vh;
-    background-color: #f4f4f9;
+    background-color: #EAF4F2;
 }
 
 .greeting {
@@ -10,17 +10,20 @@
     font-weight: bold;
     color: #333;
     text-align: center;
-    width: 100%; /* Ensures full-width centering */
+    width: 100%; 
 }
 .sidebar {
     width: 250px;
-    background-color: #EAF4F2;
+    background-color: #dee9e7;
     color: black;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: all 0.3s ease;
+    position: relative;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
+    border-radius: 10px;
 }
 
 .sidebar h2 {
@@ -103,7 +106,6 @@
 
 }
 
-
 .dashboard-content {
     flex: 1;
     background: white;
@@ -131,19 +133,32 @@
 } */
 .logout-container {
     margin-top: auto;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
 }
-.logout-button {
-    padding: 8px 12px;
-    background-color: red;
+.custom-google-btn {
+    background: #066341; 
     color: white;
+    padding: 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 15px;
+    font-weight: bold;
+    width: 90%;
+    max-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px auto;
+    text-align: center
 }
 
-.logout-button:hover {
-    background-color: darkred;
+
+.custom-google-btn:hover {
+    background-color: #044d31; 
 }
 
 .sp-logo {
