@@ -5,14 +5,22 @@
     background-color: #f4f4f9;
 }
 
+.greeting {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    width: 100%; /* Ensures full-width centering */
+}
 .sidebar {
-    background-color: #007bff;
-    color: white;
+    width: 250px;
+    background-color: #EAF4F2;
+    color: black;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-
+    justify-content: space-between;
+    transition: all 0.3s ease;
 }
 
 .sidebar h2 {
@@ -23,17 +31,25 @@
 .sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .sidebar ul li {
-    padding: 10px;
-    cursor: pointer;
+    padding: 12px;
+    border: 2px solid #066341;
     border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
     transition: all 0.3s ease;
+    margin-bottom: 10px;
+
 }
 .sidebar ul li:hover,
 .sidebar ul li.active {
     background-color: #0056b3;
+    color: white;
+
 }
 
 .main-content {
@@ -44,15 +60,22 @@
 }
 .dashboard-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: white;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+    width: 100%;
 }
 
-
+.welcome-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
 .tabs {
     display: flex;
     gap: 12px;
@@ -106,3 +129,26 @@
     background-color: #007bff;
     color: white;
 } */
+.logout-container {
+    margin-top: auto;
+}
+.logout-button {
+    padding: 8px 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: darkred;
+}
+
+.sp-logo {
+    width: 180px;  
+    height: auto; 
+    display: block; 
+    margin: 0 auto 20px auto;
+}

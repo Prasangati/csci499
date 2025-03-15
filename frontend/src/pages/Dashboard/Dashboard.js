@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./Dashboard.css";
+import { useAuthContext } from "../../context/AuthContext"; 
+import LogOut from "../../components/Auth/LogOut"; //logout Button
+
 //import { Avatar } from "../../components/ui/Avatar";
 //import { Button } from "../../components/ui/Button";
 
@@ -7,6 +10,9 @@ import "./Dashboard.css";
 
 function Dashboard() {
    const [activeTab, setActiveTab] = useState("Journal");
+   const { user } = useAuthContext(); 
+      const [sidebarOpen, setSidebarOpen] = useState(true); // State to toggle sidebar
+
 
    return (
 
@@ -16,53 +22,32 @@ function Dashboard() {
  {/* nav bar */}
 
  <aside className="sidebar">
-               <h2>Dashboard</h2>
-               <ul>
+ <img src="/logo.png" alt="spooons Logo" className="sp-logo" />
+ <ul>
                    <li className={activeTab === "Journal" ? "active" : ""} onClick={() => setActiveTab("Journal")}>Journal</li>
                    <li className={activeTab === "Progress" ? "active" : ""} onClick={() => setActiveTab("Progress")}>Progress</li>
                    <li className={activeTab === "Resources" ? "active" : ""} onClick={() => setActiveTab("Resources")}>Resources</li>
                </ul>
+
+               <div className="logout-container">
+               <LogOut /> </div>
            </aside>
 
 
 
       <main className="main-content">
       <header className="dashboard-header">
-                   <h1 className="heading">Dashboard</h1>
-                   <div className="tabs">
-                       <button 
-                           className={`tab-button ${activeTab === "Journal" ? "active" : ""}`} 
-                           onClick={() => setActiveTab("Journal")}
-                       >
-                           Journal
-                       </button>
-           <button 
-                       className={`tab-button ${activeTab === "Progress" ? "active" : ""}`} 
-                       onClick={() => setActiveTab("Progress")}
-                   >
-                       Progress
-                   </button>
-                   <button 
-                       className={`tab-button ${activeTab === "Resources" ? "active" : ""}`} 
-                       onClick={() => setActiveTab("Resources")}
-                   >
-                       Resources
-                   </button>
-           </div>
-           </header>
+
+      <h1 className="greeting">Welcome, {user?.first_name || "User"}!</h1>
+               </header>
 
 
 
-            {/*</div><button className="outline-button">Journal</button>*/}
-            {/*<button className="outline-button">Progress</button>*/}
-            {/*<button className="outline-button">Resources</button>*/}
-{/*    
-        <img 
-            src="https://via.placeholder.com/50" 
-            alt="User Profile" 
-            className="user-profile"
-        /> */}
-        {/* User can click this image to edit profile/log out */}
+
+
+
+
+
 <section className="dashboard-content"> 
 
          {/* dynamic tabs area*/}
