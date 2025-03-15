@@ -7,25 +7,35 @@ import "./Dashboard.css";
 
 function Dashboard() {
    const [activeTab, setActiveTab] = useState("Journal");
-   // need to figure out how to fetch data from the backend based on the database being used
+
    return (
 
-   // features needed: nav bar, sections: journal entries, progress tracking, etc
-   // nav bar needs to be able to switch bw the diff parts of our app
-   <div className="dashboard-container">
+
+   <div className="dashboard">
 
  {/* nav bar */}
 
-      <nav className="nav-bar">
-      <h1 className="dashboard-heading">Dashboard</h1>
+ <aside className="sidebar">
+               <h2>Dashboard</h2>
+               <ul>
+                   <li className={activeTab === "Journal" ? "active" : ""} onClick={() => setActiveTab("Journal")}>Journal</li>
+                   <li className={activeTab === "Progress" ? "active" : ""} onClick={() => setActiveTab("Progress")}>Progress</li>
+                   <li className={activeTab === "Resources" ? "active" : ""} onClick={() => setActiveTab("Resources")}>Resources</li>
+               </ul>
+           </aside>
 
-      <div className="tabs">
-      <button 
-               className={`tab-button ${activeTab === "Journal" ? "active" : ""}`} 
-               onClick={() => setActiveTab("Journal")}
-           >
-               Journal
-           </button>
+
+
+      <main className="main-content">
+      <header className="dashboard-header">
+                   <h1 className="heading">Dashboard</h1>
+                   <div className="tabs">
+                       <button 
+                           className={`tab-button ${activeTab === "Journal" ? "active" : ""}`} 
+                           onClick={() => setActiveTab("Journal")}
+                       >
+                           Journal
+                       </button>
            <button 
                        className={`tab-button ${activeTab === "Progress" ? "active" : ""}`} 
                        onClick={() => setActiveTab("Progress")}
@@ -39,6 +49,7 @@ function Dashboard() {
                        Resources
                    </button>
            </div>
+           </header>
 
 
 
@@ -52,15 +63,15 @@ function Dashboard() {
             className="user-profile"
         /> */}
         {/* User can click this image to edit profile/log out */}
-    </nav>
-         {/* tabs*/}
-         <div className="dashboard-content">
+<section className="dashboard-content"> 
+
+         {/* dynamic tabs area*/}
                 {activeTab === "Journal" && <p>Journal entries</p>}
                 {activeTab === "Progress" && <p>Track your progress here</p>}
                 {activeTab === "Resources" && <p> personalized mental health resources</p>}
-     
+                </section> </main>
                </div>
-               </div>
+       
 
        );
 

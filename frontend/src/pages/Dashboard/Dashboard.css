@@ -1,71 +1,94 @@
-.dashboard-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
+.dashboard {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.sidebar {
+    background-color: #007bff;
+    color: white;
     padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9; /* added lighter background for contrast */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 
 }
 
-.nav-bar {
-    display: flex;
-    flex-direction: column; /* added tabs vertically */
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
 
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+.sidebar ul li:hover,
+.sidebar ul li.active {
+    background-color: #0056b3;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: white;
-    padding: 15px 20px;
+    padding: 15px;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-
 }
-.dashboard-heading { /*title for now*/
-    font-size: 26px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px; 
 
-}
+
 .tabs {
     display: flex;
     gap: 12px;
 }
 
 /* journal - Progress  - resources)
-I slighlty increased sizes for now */
+ */
 .tab-button {
-    padding: 12px 15px;
+    padding: 10px 15px;
     border: 2px solid #007bff;
     background: transparent;
     color: #007bff;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: bold;
-
-    transition: all 0.3s ease; /*hover effect */
-    min-width: 120px; /* Ensures all buttons are the same width */
-    height: 45px; /* Ensures all buttons are the same height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    height: 40px;
 
 
 }
 .tab-button.active {
     background-color: #007bff; /* buttons have blue background when currently on that tap*/
     color: white;
-    border: 2px solid #007bff;
 
 }
 
-.tab-button:hover {
-    background-color: #0056b3; /* slightly blue when hover over tap */
-    color: white;
-}
 
+.dashboard-content {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
 
 /* blue border for buttons */
 /* .outline-button {
@@ -83,12 +106,3 @@ I slighlty increased sizes for now */
     background-color: #007bff;
     color: white;
 } */
-
-.dashboard-content {
-    margin-top: 20px;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* lighter shadow to add depth */
-    min-height: 200px;
-}
