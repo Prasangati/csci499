@@ -12,6 +12,7 @@
     color: #066341;
     text-align: center;
     width: 100%; 
+    
 }
 .sidebar {
     width: 250px;
@@ -85,7 +86,131 @@
 
 
 }
+.chat-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #b8ccc9;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+}
 
+.chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    height: 50px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.chat-input:focus {
+    background: white;
+    border: 1px solid #066341;
+}
+
+.send-btn {
+    background-color: #066341;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+    margin-left: 10px;
+}
+
+.send-btn:hover {
+    background-color: #04442d;
+    transform: scale(1.05);
+}
+
+/* All Entries Button */
+.all-entries-btn {
+    margin-top: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.all-entries-btn:hover {
+    background: #0056b3;
+}
+
+/* Past Journal Entries */
+.entries-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.entries-list {
+    list-style: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.entries-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.entries-list::-webkit-scrollbar-thumb {
+    background: #066341;
+    border-radius: 5px;
+}
+
+.entry {
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.entry:hover {
+    transform: scale(1.02);
+}
+
+.entry-date {
+    font-size: 12px;
+    color: gray;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Back to Journal Button */
+.back-btn {
+    margin-top: 10px;
+    background: #066341;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #04442d;
+}
 
 /* .welcome-section {
     display: flex;
@@ -210,3 +335,107 @@
     transform: translateY(-50%) scale(1.1);
 }
 
+
+
+/* Journal Container */
+.journal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ }
+ 
+ /* Input Box */
+ .journal-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+ }
+ 
+ .journal-input {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+ }
+ 
+ /* Buttons */
+ .save-btn, .view-entries-btn, .back-btn {
+    padding: 10px 20px;
+    background-color: #066341;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+ }
+ 
+ .save-btn:hover, .view-entries-btn:hover, .back-btn:hover {
+    background-color: #04442d;
+ }
+ 
+ .view-entries-btn {
+    align-self: flex-start;
+    background-color: #4CAF50;
+ }
+ 
+ .view-entries-btn:hover {
+    background-color: #45a049;
+ }
+ 
+ .back-btn {
+    align-self: flex-start;
+    background-color: #066341;
+ }
+ 
+ .back-btn:hover {
+    background-color: #04412b;
+ }
+ 
+ /* Past Entries */
+ .entries-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+ }
+ 
+ .entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+ }
+ 
+ .entry-card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .entry-date {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+ }
+ 
+ .entry-text {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+ }
+ 
+ .no-entries {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+ }
