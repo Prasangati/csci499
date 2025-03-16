@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'social_django',
     'corsheaders',
-    'journal_entries'
+    # 'journal_entries'
 ]
 
 
