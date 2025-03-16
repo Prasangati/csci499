@@ -16,6 +16,20 @@ function Dashboard() {
    const toggleSidebar = () => {
       setSidebarOpen(!sidebarOpen);
    };
+   const quotes = [
+      "“Be not afraid of growing slowly, be afraid only of standing still.” — Chinese Proverb",
+      "“The only person you are destined to become is the person you decide to be.” — Ralph Waldo Emerson ",
+      "“Do your best until you know better. Then when you know better, do better.” — Maya Angelou ",
+      "Strive for progress, not perfection.  ― David Perlmutter" ,
+      "“Your future is hidden in your daily routine.” — Mike Murdock ", 
+      "“The difference between who you are and who you want to be is what you do.”",
+      "“We are what we repeatedly do. Excellence, then, is not an act, but a habit.” — Will Durant"
+
+
+   ];
+   
+   const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
    return (
 
 
@@ -39,8 +53,6 @@ function Dashboard() {
 
 
     
-
-
       {/* an arrow shape button to open close sidebar  */}
       <button className={`sidebar-toggle ${sidebarOpen ? "" : "collapsed"}`} onClick={toggleSidebar}>
             {sidebarOpen ? "◄" : "►"}
@@ -52,15 +64,15 @@ function Dashboard() {
 
       <header className="dashboard-header">
 
-      <h1 className="greeting">Welcome, {user?.first_name}!</h1>
-               </header>
+
+   <h1 className="greeting">{randomQuote}</h1>               </header>
 
 <section className="dashboard-content"> 
 
          {/* dynamic tabs area*/}
                 {activeTab === "Journal" && <p>Journal entries</p>}
                 {activeTab === "Progress" && <p>Track your progress here</p>}
-                {activeTab === "Resources" && <p> personalized mental health resources</p>}
+                {activeTab === "Resources" && <p>Personalized mental health resources</p>}
                 </section> </main>
                </div>
        

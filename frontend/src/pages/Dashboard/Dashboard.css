@@ -7,9 +7,9 @@
 }
 
 .greeting {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: bold;
-    color: #333;
+    color: #066341;
     text-align: center;
     width: 100%; 
 }
@@ -80,7 +80,7 @@
     position: relative;
     text-align: center;
 
-    font-size: 22px; 
+    font-size: 20px; 
     font-weight: bold;
 
 
@@ -151,7 +151,7 @@
     align-items: center;
     width: 100%;
 }
-/* .custom-google-btn {
+.custom-google-btn {
     background: #066341; 
     color: white;
     padding: 12px;
@@ -174,10 +174,10 @@
     background-color: #04442d; 
     transform: scale(1.05); 
 
-} */
+}
 
 .sp-logo {
-    width: 180px;  
+    width: 210px;  
     height: auto; 
     display: block; 
     margin: 0 auto 20px auto;
@@ -209,3 +209,4 @@
     background-color: #04442d;
     transform: translateY(-50%) scale(1.1);
 }
+
