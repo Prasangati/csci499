@@ -9,7 +9,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from datetime import datetime, timezone  # Correct import for UTC handling
 from rest_framework import status
-from .serializers import LoginSerializer
+from .serializers import LoginSerializer,PasswordResetSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -209,3 +209,16 @@ def login_view(request):
             "last_name": auth_user.last_name
         }
     })
+
+
+@api_view(['POST'])
+def password_reset_request(request):
+    serializer = PasswordResetSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        serializer.save()
+        # Always return 200 even if email doesn't exist to prevent email enumeration
+        return Response({'detail': 'If an account exists, you will receive a password reset email.'},
+                        status=status.HTTP_200_OK)
+
+    # Return validation errors
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
