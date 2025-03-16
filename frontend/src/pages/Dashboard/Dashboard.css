@@ -33,10 +33,7 @@
     overflow: hidden;
     border-right: none; /* Remove border when closing collapsed */
 }
-.sidebar h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
+
 
 .sidebar ul {
     list-style: none;
@@ -63,7 +60,33 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 
 }
+.sidebar-toggle {
+    position: absolute;
+    left: 250px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #066341;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+.sidebar-toggle.collapsed {
+    left: 0;
+}
 
+.sidebar-toggle:hover {
+    background-color: #04442d;
+    transform: translateY(-50%) scale(1.1);
+}
 .main-content {
     flex: 1;
     display: flex;
@@ -86,33 +109,199 @@
 
 
 }
-.chat-box {
-    display: flex;
-    align-items: center;
+.dashboard-content {
+    flex: 1;
     background: white;
-    border: 1px solid #b8ccc9;
     border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+.journal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+}
+.journal-nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
     padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #b8ccc9;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.journal-nav button {
+    flex: 1;
+    text-align: center;
+    background: none;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #066341;
+    transition: all 0.3s ease;
+}
+
+.journal-nav .active {
+    border-bottom: 3px solid #066341;
+    font-weight: bold;
+}
+.title-input {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px;
+    border: 2px solid #b8ccc9;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: white;
+    transition: border 0.3s ease;
+}
+
+.title-input:focus {
+    border: 2px solid #066341;
+    outline: none;
+}
+.journal-input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.journal-input {
+    width: 100%;
+    height: 200px;
+    padding: 12px;
+    border: 2px solid #b8ccc9;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    background: white;
+    transition: border 0.3s ease;
+}
+
+.journal-input:focus {
+    border: 2px solid #066341;
+    outline: none;
+}
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
     margin-top: 10px;
 }
 
-.chat-input {
-    flex: 1;
+.save-draft-btn,
+.send-btn {
+    padding: 12px 20px;
     border: none;
-    outline: none;
-    font-size: 16px;
-    padding: 10px;
-    resize: none;
-    height: 50px;
-    border-radius: 5px;
-    background: #f9f9f9;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
 
-.chat-input:focus {
-    background: white;
-    border: 1px solid #066341;
+.save-draft-btn {
+    background-color: gray;
+    color: white;
 }
+
+.send-btn {
+    background-color: #066341;
+    color: white;
+}
+
+.save-draft-btn:hover {
+    background-color: #555;
+}
+
+.send-btn:hover {
+    background-color: #04442d;
+}
+
+
+.entries-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.entries-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.entries-list::-webkit-scrollbar-thumb {
+    background: #066341;
+    border-radius: 5px;
+}
+
+.entry-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #b8ccc9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.entry-card:hover {
+    transform: scale(1.02);
+}
+
+.entry-card h4 {
+    font-size: 16px;
+    color: #066341;
+    margin-bottom: 5px;
+}
+
+.entry-date {
+    font-size: 12px;
+    color: gray;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.entry-text {
+    font-size: 14px;
+    color: #333;
+}
+.back-btn {
+    margin-top: 10px;
+    background: #066341;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #04442d;
+}
+
+
 
 .send-btn {
     background-color: #066341;
@@ -130,69 +319,6 @@
     background-color: #04442d;
     transform: scale(1.05);
 }
-
-/* All Entries Button */
-.all-entries-btn {
-    margin-top: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.all-entries-btn:hover {
-    background: #0056b3;
-}
-
-/* Past Journal Entries */
-.entries-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.entries-list {
-    list-style: none;
-    padding: 0;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.entries-list::-webkit-scrollbar {
-    width: 5px;
-}
-
-.entries-list::-webkit-scrollbar-thumb {
-    background: #066341;
-    border-radius: 5px;
-}
-
-.entry {
-    background: white;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.entry:hover {
-    transform: scale(1.02);
-}
-
-.entry-date {
-    font-size: 12px;
-    color: gray;
-    display: block;
-    margin-bottom: 5px;
-}
-
 /* Back to Journal Button */
 .back-btn {
     margin-top: 10px;
@@ -212,63 +338,6 @@
     background: #04442d;
 }
 
-/* .welcome-section {
-    display: flex;
-    align-items: center;
-    gap: 15px; 
-}
-.tabs {
-    display: flex;
-    gap: 12px;
-} */
-
-/* journal - Progress  - resources)
- */
-/* .tab-button {
-    padding: 10px 15px;
-    border: 2px solid #066341;
-    background: transparent;
-    color: #066341;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    min-width: 120px;
-    height: 40px;
-
-
-}
-.tab-button.active {
-    background-color: #066341; 
-    color: white;
-
-} */
-
-.dashboard-content {
-    flex: 1;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-top: 20px;
-}
-
-/* blue border for buttons */
-/* .outline-button {
-    padding: 12px 18px;
-    border: 2px solid #007bff;
-    background: transparent;
-    color: #007bff;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.outline-button:hover {
-    background-color: #007bff;
-    color: white;
-} */
 .logout-container {
     margin-top: auto;
     display: flex;
@@ -307,135 +376,4 @@
     display: block; 
     margin: 0 auto 20px auto;
 }
-.sidebar-toggle {
-    position: absolute;
-    left: 250px; 
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #066341;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    z-index: 10;
-}
 
-.sidebar-toggle.collapsed {
-    left: 0; /* move arrow to the leftwhen closes */
-}
-.sidebar-toggle:hover {
-    background-color: #04442d;
-    transform: translateY(-50%) scale(1.1);
-}
-
-
-
-/* Journal Container */
-.journal-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
- }
- 
- /* Input Box */
- .journal-input-box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
- }
- 
- .journal-input {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    resize: vertical;
- }
- 
- /* Buttons */
- .save-btn, .view-entries-btn, .back-btn {
-    padding: 10px 20px;
-    background-color: #066341;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
- }
- 
- .save-btn:hover, .view-entries-btn:hover, .back-btn:hover {
-    background-color: #04442d;
- }
- 
- .view-entries-btn {
-    align-self: flex-start;
-    background-color: #4CAF50;
- }
- 
- .view-entries-btn:hover {
-    background-color: #45a049;
- }
- 
- .back-btn {
-    align-self: flex-start;
-    background-color: #066341;
- }
- 
- .back-btn:hover {
-    background-color: #04412b;
- }
- 
- /* Past Entries */
- .entries-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 15px;
- }
- 
- .entries-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
- }
- 
- .entry-card {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
- }
- 
- .entry-date {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 10px;
- }
- 
- .entry-text {
-    font-size: 14px;
-    color: #333;
-    margin: 0;
- }
- 
- .no-entries {
-    font-size: 14px;
-    color: #666;
-    text-align: center;
- }
