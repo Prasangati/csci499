@@ -60,6 +60,7 @@ def google_signup(request):
             defaults={
                 "first_name": id_info.get('given_name', ''),
                 "last_name": id_info.get('family_name', ''),
+                "profile_pic": id_info.get('picture', ''),
             }
         )
         # Assign backend for session-based login
