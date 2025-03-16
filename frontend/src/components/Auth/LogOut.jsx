@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const LogOut = () => {
   const navigate = useNavigate();
-  const location = useLocation();
+  //const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -13,15 +13,17 @@ const LogOut = () => {
         {},
         { withCredentials: true }
       );
-      // After a successful logout, check if we are on the home route.
-      if (location.pathname === "/") {
+      // After a successful logout, redirect to login for now
+      navigate("/login");
+
+      //if (location.pathname === "/") {
         // If already at home, force a reload so that context updates.
         window.location.reload();
-      } else {
+     // } else {
         // Otherwise, navigate to home.
-        navigate("/");
-      }
-    } catch (error) {
+       // navigate("/");
+     // }
+   } catch (error) {
       console.error("Logout failed:", error);
     }
   };
