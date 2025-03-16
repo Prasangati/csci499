@@ -13,16 +13,19 @@ function Dashboard() {
    const { user } = useAuthContext(); 
    const [sidebarOpen, setSidebarOpen] = useState(true); 
 
-
+   const toggleSidebar = () => {
+      setSidebarOpen(!sidebarOpen);
+   };
    return (
 
 
    <div className="dashboard">
 
+
  {/* nav bar */}
 
- <aside className="sidebar">
- <img src="/logo.png" alt="spooons Logo" className="sp-logo" />
+ <aside className={`sidebar ${sidebarOpen ? "" : "collapsed"}`}>
+    <img src="/logo.png" alt="spooons Logo" className="sp-logo" />
  <ul>
                    <li className={activeTab === "Journal" ? "active" : ""} onClick={() => setActiveTab("Journal")}>Journal</li>
                    <li className={activeTab === "Progress" ? "active" : ""} onClick={() => setActiveTab("Progress")}>Progress</li>
@@ -35,18 +38,22 @@ function Dashboard() {
 
 
 
-      <main className="main-content">
+    
+
+
+      {/* an arrow shape button to open close sidebar  */}
+      <button className={`sidebar-toggle ${sidebarOpen ? "" : "collapsed"}`} onClick={toggleSidebar}>
+            {sidebarOpen ? "◄" : "►"}
+         </button>
+
+         <main className="main-content">
+
+
+
       <header className="dashboard-header">
 
-      <h1 className="greeting">Welcome, {user?.first_name || "User"}!</h1>
+      <h1 className="greeting">Welcome, {user?.first_name}!</h1>
                </header>
-
-
-
-
-
-
-
 
 <section className="dashboard-content"> 
 

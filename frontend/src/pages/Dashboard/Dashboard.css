@@ -3,6 +3,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #EAF4F2;
+    position: relative;
 }
 
 .greeting {
@@ -25,7 +26,12 @@
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); 
     border-right: 2px solid #b8ccc9; /* more depth */
 }
-
+.sidebar.collapsed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    border-right: none; /* Remove border when closing collapsed */
+}
 .sidebar h2 {
     font-size: 22px;
     margin-bottom: 10px;
@@ -74,13 +80,14 @@
     position: relative;
     text-align: center;
 
-font-size: 22px; 
-font-weight: bold;
+    font-size: 22px; 
+    font-weight: bold;
 
 
 }
 
-.welcome-section {
+
+/* .welcome-section {
     display: flex;
     align-items: center;
     gap: 15px; 
@@ -88,11 +95,11 @@ font-weight: bold;
 .tabs {
     display: flex;
     gap: 12px;
-}
+} */
 
 /* journal - Progress  - resources)
  */
-.tab-button {
+/* .tab-button {
     padding: 10px 15px;
     border: 2px solid #066341;
     background: transparent;
@@ -107,10 +114,10 @@ font-weight: bold;
 
 }
 .tab-button.active {
-    background-color: #066341; /* buttons have blue background when currently on that tap*/
+    background-color: #066341; 
     color: white;
 
-}
+} */
 
 .dashboard-content {
     flex: 1;
@@ -144,7 +151,7 @@ font-weight: bold;
     align-items: center;
     width: 100%;
 }
-.custom-google-btn {
+/* .custom-google-btn {
     background: #066341; 
     color: white;
     padding: 12px;
@@ -165,13 +172,40 @@ font-weight: bold;
 
 .custom-google-btn:hover {
     background-color: #04442d; 
-    transform: scale(1.05); /*  effect on hover */
+    transform: scale(1.05); 
 
-}
+} */
 
 .sp-logo {
     width: 180px;  
     height: auto; 
     display: block; 
     margin: 0 auto 20px auto;
+}
+.sidebar-toggle {
+    position: absolute;
+    left: 250px; 
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #066341;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.sidebar-toggle.collapsed {
+    left: 0; /* move arrow to the leftwhen closes */
+}
+.sidebar-toggle:hover {
+    background-color: #04442d;
+    transform: translateY(-50%) scale(1.1);
 }
