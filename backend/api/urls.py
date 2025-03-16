@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import google_signup, signup, authcontext, logout_view, login_view, password_reset_request
+from .views import google_signup, signup, authcontext, logout_view, login_view, password_reset_request, reset_password_confirm
 
 urlpatterns = [
     path('auth/google-signup/', google_signup,name='google-signup'),
@@ -8,4 +8,5 @@ urlpatterns = [
     path('auth/logout/',logout_view, name='logout' ),
     path('auth/login/', login_view, name='login'),
     path('auth/reset/', password_reset_request, name='password_reset_request'),
+    path("auth/reset-password-confirm/", reset_password_confirm, name="reset_password_confirm"),
 ]

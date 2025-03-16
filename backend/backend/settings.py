@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'social_django',
-    'corsheaders',
-    'journal_entries'
+    'corsheaders'#,
+    #'journal_entries'
 ]
 
 
@@ -97,6 +97,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'apikey'  # Literal string (not your username)
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')  # From Step 2
 DEFAULT_FROM_EMAIL = 'prasangahere@gmail.com'  # Use your domain or app name
+PASSWORD_RESET_TIMEOUT = 600 # Password Reset token active for 10 minutes
 
 # Frontend URL for password reset links
 FRONTEND_URL = 'http://localhost:3000'  # Your React app's URL
