@@ -118,41 +118,39 @@ useEffect(() => {
                {/* Journal Tab */}
                {activeTab === "Journal" && (
                   <div className="journal-container">
+                     
+                     <nav className="journal-nav">
+                        <button 
+                           className={!showEntries ? "active" : ""} 
+                           onClick={() => setShowEntries(false)}>
+                           New Entry
+                        </button>
+                        <button 
+                           className={showEntries ? "active" : ""} 
+                           onClick={() => setShowEntries(true)}>
+                           Past Entries
+                        </button>
+                     </nav>
+
+                     {/* New Entry View */}
                      {!showEntries ? (
                         <>
-                        {/* nav taps for current & past entries */}
-                  <nav className="journal-nav">
-                     <button 
-                        className={activeTab === "Journal" ? "active" : ""} 
-                        onClick={() => setShowEntries(false)}>
-                        New Entry
-                     </button>
-                     <button 
-                        className={showEntries ? "active" : ""} 
-                        onClick={() => setShowEntries(true)}>
-                        Past Entries
-                     </button>
-                  </nav>
-                  {/* title of new entry */}
-            <input
-               type="text"
-               className="title-input"
-               placeholder="Title * "
-               value={title}
-               onChange={(e) => setTitle(e.target.value)}
-               required
-            />
-                           {/* Input Box */}
-                           {/* thinking of having different and random prompts here for each new entry */}
+                           <input
+                              type="text"
+                              className="title-input"
+                              placeholder="Title * "
+                              value={title}
+                              onChange={(e) => setTitle(e.target.value)}
+                              required
+                           />
                            <div className="journal-input-box">
                               <textarea
                                  className="journal-input"
-            
                                  placeholder="Write your thoughts ..."
                                  value={newEntry}
                                  onChange={handleInputChange}
                               />
-                              </div>
+                           </div>
                            <div className="button-group">
                               <button className="save-draft-btn" onClick={handleSaveDraft}>Save as Draft</button>
                               <button className="send-btn" onClick={handleSendEntry}>Send</button>
@@ -175,7 +173,7 @@ useEffect(() => {
                                  <p className="no-entries">No past entries yet.</p>
                               )}
                            </div>
-                           <button className="back-btn" onClick={() => setShowEntries(false)}>Back to New Entry</button>
+                          
                         </>
                      )}
                   </div>
