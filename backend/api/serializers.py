@@ -108,13 +108,14 @@ class PasswordResetSerializer(serializers.Serializer):
 
         # Email content
         subject = "Password Reset Request"
-        message = f"Click the link to reset your password:\n\n{reset_url}"
+        text_message = f"Please use the link below to reset your password:\n\n{reset_url}"
+        html_message = f'Click <a href="{reset_url}">here</a> to reset your password.'
 
-        # Send email
         send_mail(
             subject,
-            message,
+            text_message,
             settings.DEFAULT_FROM_EMAIL,
             [user.email],
+            html_message=html_message,
             fail_silently=False,
         )

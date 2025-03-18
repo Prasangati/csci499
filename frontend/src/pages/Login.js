@@ -125,7 +125,7 @@ function Login() {
         try {
             const response = await axios.post("http://localhost:8000/api/auth/reset/", { email: resetEmail.trim() });
             if (response.status === 200) {
-                setResetMessage("If your account exists,a reset link has been sent to your email.");
+                setResetMessage("If your account exists, a reset link has been sent to your email.");
                 setTimeout(() => setIsModalOpen(false), 2000); // after the reset is successful modal closes 
             } else {
                 setResetMessage("Something went wrong. Please try again.");
