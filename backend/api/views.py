@@ -141,6 +141,7 @@ def authcontext(request):
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
             # You can include other fields as needed.
+            # 'profile_picture': request.user.profile_picture,
         }
         return JsonResponse({
             'isAuthenticated': True,
@@ -207,6 +208,7 @@ def login_view(request):
             "email": auth_user.email,
             "first_name": auth_user.first_name,
             "last_name": auth_user.last_name
+            # "profile_picture": auth_user.profile_picture,
         }
     })
 

@@ -1,7 +1,5 @@
 import React from "react";
-import { Avatar } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-
+import { Button } from '@/components/ui/button';
 
 function Dashboard() {
    // need to figure out how to fetch data from the backend based on the database being used
@@ -18,9 +16,10 @@ function Dashboard() {
             <Button variant="outline">Progress</Button>
             <Button variant="outline">Resources</Button>
          </div>
-      <Avatar className="user-profile" /> // need to click so user can edit profile/log out
+       // need to click on user profile so user can edit profile/log out
+
       </nav>
-      // How do I fetch data from the backend?
+
 
 
    </div>
