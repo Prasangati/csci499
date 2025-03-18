@@ -224,3 +224,53 @@ def password_reset_request(request):
 
     # Return validation errors
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from django.contrib.auth import get_user_model  
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.http import JsonResponse
+import json
+import traceback
+from django.views.decorators.csrf import csrf_exempt  
+
+User = get_user_model()  
+
+@csrf_exempt  
+def reset_password_confirm(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            uid = data.get("uid")
+            token = data.get("token")
+            new_password = data.get("new_password")
+
+            print(f"✅ Received: UID={uid}, Token={token}, New Password={new_password}")  
+
+            if not uid or not token or not new_password:
+                print("❌ Missing data in request")
+                return JsonResponse({"message": "Missing data."}, status=400)
+
+            try:
+                user_id = urlsafe_base64_decode(uid).decode()
+                user = User.objects.get(pk=user_id)  
+                print(f"✅ Found user: {user.email}")
+            except (User.DoesNotExist, ValueError, TypeError) as e:
+                print(f"❌ User lookup error: {e}")
+                return JsonResponse({"message": "Invalid user."}, status=400)
+
+            if not default_token_generator.check_token(user, token):
+                print("❌ Invalid or expired token")
+                return JsonResponse({"message": "Invalid or expired token."}, status=400)
+
+            # Update the password
+            user.set_password(new_password)
+            user.save()
+            print("✅ Password reset successful")
+
+            return JsonResponse({"message": "Password reset successful."})
+
+        except Exception as e:
+            print(f"❌ Server error: {e}")  
+            traceback.print_exc()  
+            return JsonResponse({"message": "An error occurred."}, status=500)

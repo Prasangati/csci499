@@ -214,9 +214,10 @@ function Login() {
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <button className="close" onClick={() => (false)}>
-              &times;
-            </button>
+          <button className="close" onClick={() => setIsModalOpen(false)}>
+  &times;
+</button>
+
             <h2>Forgot Password?</h2>
             <p>Enter your email below and we'll send you a link to reset your password.</p>
 
