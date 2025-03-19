@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Dashboard.css";
+import "./Journal.css";
 
 function JournalEntries() {
   const [title, setTitle] = useState(""); // state for entry title
