@@ -100,7 +100,7 @@ function Login() {
   } finally {
     setLoadingLocal(false);
   }
-};
+  };
 
 
 
@@ -123,9 +123,9 @@ function Login() {
          //clear previous request before making new request
         setResetMessage("Processing reset password request...");
         try {
-            const response = await axios.post("http://localhost:8000/api/auth/google-signup/", { email: resetEmail.trim() });        
+            const response = await axios.post("http://localhost:8000/api/auth/reset/", { email: resetEmail.trim() });
             if (response.status === 200) {
-                setResetMessage("A reset link has been sent to your email.");
+                setResetMessage("If your account exists, a reset link has been sent to your email.");
                 setTimeout(() => setIsModalOpen(false), 2000); // after the reset is successful modal closes 
             } else {
                 setResetMessage("Something went wrong. Please try again.");
@@ -214,9 +214,10 @@ function Login() {
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <button className="close" onClick={() => setIsModalOpen(false)}>
-              &times;
-            </button>
+          <button className="close" onClick={() => setIsModalOpen(false)}>
+  &times;
+</button>
+
             <h2>Forgot Password?</h2>
             <p>Enter your email below and we'll send you a link to reset your password.</p>
 

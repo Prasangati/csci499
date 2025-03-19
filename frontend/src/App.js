@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import SignupSuccess from "./pages/SignupSucess"
 import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard/Dashboard"; // dashboard component
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 
 
@@ -21,6 +22,7 @@ function App() {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup-success" element={<SignupSuccess />} />
+                    <Route path="/reset-password/:uid/:token" element={<ResetPassword />} />
                     <Route path="*" element={<h1>Page Not Found</h1>} /> {/* Catch-all for unknown routes */}
                 </Routes>
             </Router>

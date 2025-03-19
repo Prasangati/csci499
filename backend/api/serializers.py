@@ -1,8 +1,15 @@
 # serializers.py (create this file if it doesn't exist)
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from django.utils.http import urlsafe_base64_encode
 from django.core.exceptions import ValidationError
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.mail import send_mail
+from django.conf import settings
 
+
+User = get_user_model()
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(
         required=True,
@@ -72,3 +79,43 @@ class SignupSerializer(serializers.ModelSerializer):
             raise ValidationError({'name': 'First name cannot be empty'})
 
         return data
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        # Normalize and validate email
+        email = value.lower().strip()
+        try:
+            self.user = User.objects.get(email=email)
+
+        except User.DoesNotExist:
+            raise serializers.ValidationError("No account found with this email address.")
+        return email
+
+    def save(self):
+        request = self.context.get('request')
+        user = self.user
+        token_generator = PasswordResetTokenGenerator()
+
+        # Generate password reset token
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        token = token_generator.make_token(user)
+
+        # Build reset URL
+        reset_url = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}/"
+
+        # Email content
+        subject = "Password Reset Request"
+        text_message = f"Please use the link below to reset your password:\n\n{reset_url}"
+        html_message = f'Click <a href="{reset_url}">here</a> to reset your password.'
+
+        send_mail(
+            subject,
+            text_message,
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email],
+            html_message=html_message,
+            fail_silently=False,
+        )

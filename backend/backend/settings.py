@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
     'social_django',
     'corsheaders',
+    # 'journal_entries'
 ]
 
 
@@ -89,14 +90,13 @@ AUTHENTICATION_BACKENDS = (
 
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Development
-
-EMAIL_HOST = 'smtp.gmail.com'  # See provider list below
-EMAIL_PORT = 587  # Standard port for TLS
+EMAIL_BACKEND = 'api.backends.InsecureEmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your@gmail.com'
-EMAIL_HOST_PASSWORD = 'your-app-password'
-DEFAULT_FROM_EMAIL = 'noreply@Spoon.com'  # Displayed in recipient's inbox
-SERVER_EMAIL = 'errors@yourdomain.com'  # For admin error notifications
+EMAIL_HOST_USER = 'apikey'  # Literal string (not your username)
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')  # From Step 2
+DEFAULT_FROM_EMAIL = 'prasangahere@gmail.com'  # Use your domain or app name
 
 # Frontend URL for password reset links
 FRONTEND_URL = 'http://localhost:3000'  # Your React app's URL

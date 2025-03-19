@@ -9,7 +9,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 from datetime import datetime, timezone  # Correct import for UTC handling
 from rest_framework import status
-from .serializers import LoginSerializer
+from .serializers import LoginSerializer,PasswordResetSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -141,6 +141,7 @@ def authcontext(request):
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
             # You can include other fields as needed.
+            # 'profile_picture': request.user.profile_picture,
         }
         return JsonResponse({
             'isAuthenticated': True,
@@ -207,5 +208,69 @@ def login_view(request):
             "email": auth_user.email,
             "first_name": auth_user.first_name,
             "last_name": auth_user.last_name
+            # "profile_picture": auth_user.profile_picture,
         }
     })
+
+
+@api_view(['POST'])
+def password_reset_request(request):
+    serializer = PasswordResetSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        serializer.save()
+        # Always return 200 even if email doesn't exist to prevent email enumeration
+        return Response({'detail': 'If an account exists, you will receive a password reset email.'},
+                        status=status.HTTP_200_OK)
+
+    # Return validation errors
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from django.contrib.auth import get_user_model  
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.http import JsonResponse
+import json
+import traceback
+from django.views.decorators.csrf import csrf_exempt  
+
+User = get_user_model()  
+
+@csrf_exempt  
+def reset_password_confirm(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            uid = data.get("uid")
+            token = data.get("token")
+            new_password = data.get("new_password")
+
+            print(f"✅ Received: UID={uid}, Token={token}, New Password={new_password}")  
+
+            if not uid or not token or not new_password:
+                print("❌ Missing data in request")
+                return JsonResponse({"message": "Missing data."}, status=400)
+
+            try:
+                user_id = urlsafe_base64_decode(uid).decode()
+                user = User.objects.get(pk=user_id)  
+                print(f"✅ Found user: {user.email}")
+            except (User.DoesNotExist, ValueError, TypeError) as e:
+                print(f"❌ User lookup error: {e}")
+                return JsonResponse({"message": "Invalid user."}, status=400)
+
+            if not default_token_generator.check_token(user, token):
+                print("❌ Invalid or expired token")
+                return JsonResponse({"message": "Invalid or expired token."}, status=400)
+
+            # Update the password
+            user.set_password(new_password)
+            user.save()
+            print("✅ Password reset successful")
+
+            return JsonResponse({"message": "Password reset successful."})
+
+        except Exception as e:
+            print(f"❌ Server error: {e}")  
+            traceback.print_exc()  
+            return JsonResponse({"message": "An error occurred."}, status=500)

@@ -3,7 +3,6 @@ import "./Dashboard.css";
 import LogOut from "../../components/Auth/LogOut"; //logout Button
 import Journal from "./Journal"; // journal new component
 
-
 function Dashboard() {
    const [activeTab, setActiveTab] = useState("Journal");
    const [sidebarOpen, setSidebarOpen] = useState(true); 
@@ -46,9 +45,6 @@ useEffect(() => {
             </div>
          </aside>
 
-         <button className={`sidebar-toggle ${sidebarOpen ? "" : "collapsed"}`} onClick={toggleSidebar}>
-            {sidebarOpen ? "◄" : "►"}
-         </button>
 
          {/* Main Content */}
          <main className="main-content">
