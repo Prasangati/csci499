@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
-//import { useAuthContext } from "../../context/AuthContext"; 
 import LogOut from "../../components/Auth/LogOut"; //logout Button
 import Journal from "./Journal"; // journal new component
 
 
 function Dashboard() {
    const [activeTab, setActiveTab] = useState("Journal");
-   //const { user } = useAuthContext(); 
    const [sidebarOpen, setSidebarOpen] = useState(true); 
   
 
@@ -57,11 +55,11 @@ useEffect(() => {
             <header className="dashboard-header">
             <h1 className="greeting">{quotes[currentQuoteIndex]}</h1>
             </header>
-
+      {/* journal tab */}
             <section className="dashboard-content"> 
                {activeTab === "Journal" && <Journal />}
 
-               {/* Progress Tab */}
+         
                {activeTab === "Progress" && <p>Track your progress here</p>}
 
                {/* Resources Tab */}
