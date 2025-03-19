@@ -44,7 +44,9 @@ useEffect(() => {
                <LogOut />
             </div>
          </aside>
-
+         <button className={`sidebar-toggle ${sidebarOpen ? "" : "collapsed"}`} onClick={toggleSidebar}>
+            {sidebarOpen ? "◄" : "►"}
+         </button>
 
          {/* Main Content */}
          <main className="main-content">
