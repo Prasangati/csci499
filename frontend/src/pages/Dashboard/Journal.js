@@ -24,7 +24,7 @@ function JournalEntries() {
     setTitle("");
     setNewEntry("");
   };
-//submit entry
+//submit entry with confirmation
 
   const handleSendEntry = () => {
     if (title.trim() === "") {
@@ -35,6 +35,11 @@ function JournalEntries() {
       alert("Entry cannot be empty.");
       return;
     }
+     
+     if (!window.confirm("Are you sure you're ready to send this journal entry?")) {
+      return; 
+    }
+
     const finalEntry = {
       id: entries.length + 1,
       title,
