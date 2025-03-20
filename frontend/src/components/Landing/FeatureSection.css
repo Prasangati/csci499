@@ -1,0 +1,46 @@
+/* Feature Section */
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 50px;
+    background-color: #f0f8ff;
+}
+
+/* Feature Container */
+.feature-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 90%;
+}
+
+/* Left Side - Image */
+.feature-image img {
+    width: 400px;
+    height: auto;
+    max-width: 100%;
+}
+
+/* Right Side - Text Content */
+.feature-text {
+    max-width: 500px;
+    text-align: left;
+}
+
+.feature-text h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.feature-text p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
