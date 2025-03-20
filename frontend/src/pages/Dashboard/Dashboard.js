@@ -9,22 +9,6 @@ function Dashboard() {
    //const { user } = useAuthContext(); 
   
 
-   // const quotes = [
-   //    "“Be not afraid of growing slowly, be afraid only of standing still.” — Chinese Proverb",
-   //    "“The only person you are destined to become is the person you decide to be.” — Ralph Waldo Emerson",
-   //    "“Do your best until you know better. Then when you know better, do better.” — Maya Angelou",
-   //    "Strive for progress, not perfection.  ― David Perlmutter",
-   //    "“Your future is hidden in your daily routine.” — Mike Murdock", 
-   //    "“The difference between who you are and who you want to be is what you do.”",
-   //    "“We are what we repeatedly do. Excellence, then, is not an act, but a habit.” — Will Durant"
-   // ];
-   // const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
-
-
-// // Change quote only when the tab changes
-// useEffect(() => {
-//    setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-// }, [activeTab]); 
 
    return (
       <div className="dashboard">
