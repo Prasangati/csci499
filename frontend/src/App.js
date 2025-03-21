@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import LandingPage from "./pages/LandingPage";
 import SignupSuccess from "./pages/SignupSucess"
 import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard/Dashboard"; // dashboard component

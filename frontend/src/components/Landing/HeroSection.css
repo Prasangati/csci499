@@ -1,0 +1,124 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    padding: 50px;
+    margin-top: 80px; /* ✅ Pushes the Hero Section below the navbar */
+}
+
+
+/* Hero Container */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ✅ Ensures proper layout */
+    max-width: 1200px;
+    width: 90%;
+    height: 100%; /* ✅ Ensures full height */
+}
+
+/* Left Side - Image */
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+.hero-image img {
+    width: 500px;
+    height: auto;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+/* Prevent image from shrinking too much */
+@media (max-width: 900px) {
+    .hero-image img {
+        width: 400px; /* ✅ Image size doesn't shrink too much */
+    }
+}
+
+/* Right Side - Text Content */
+.hero-text {
+    max-width: 500px;
+    text-align: center;  /* ✅ Center aligns all text */
+    flex: 1;
+}
+
+/* Center each line within itself */
+.hero-text h1 {
+    font-size: 48px;  /* ✅ Larger heading */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* ✅ Centers text */
+}
+
+.hero-text p {
+    font-size: 22px; /* ✅ Larger subtext */
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.8;
+    text-align: center; /* ✅ Centers text */
+}
+
+/* CTA Button */
+.cta-button {
+    background-color: white;
+    color: #0077b6;
+    padding: 14px 28px;
+    border: 2px solid #0077b6;
+    border-radius: 6px;
+    font-size: 20px; /* ✅ Larger button text */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: block;
+    margin: 0 auto; /* ✅ Centers button horizontally */
+}
+
+.cta-button:hover {
+    background-color: green;
+    color: white;
+}
+
+/* ✅ Responsive: Move text below the image when screen is small */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px; /* ✅ Adds spacing when stacked */
+    }
+
+    .hero-image {
+        width: 100%;
+    }
+
+    .hero-text {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
+
+    .hero-text p {
+        font-size: 20px;
+    }
+
+    .cta-button {
+        font-size: 18px;
+        padding: 12px 24px;
+    }
+}
+
